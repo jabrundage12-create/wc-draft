@@ -115,7 +115,7 @@ function snakeOrder(){const o=[];for(let r=0;r<SQUAD;r++){const s=[...Array(NMGR
 const ORD=snakeOrder();
 function catCounts(ids){const c={GK:0,DEF:0,CM:0,ST:0};ids.forEach(id=>{const p=PLAYERS[id];if(p.p.includes('GK'))c.GK++;if(p.p.some(x=>DEFTAGS.includes(x)))c.DEF++;if(p.p.includes('CM'))c.CM++;if(p.p.includes('ST'))c.ST++;});return c;}
 function unmet(ids){const c=catCounts(ids);return Object.keys(MINS).reduce((s,k)=>s+Math.max(0,MINS[k]-c[k]),0);}
-function curIdx(){return STATE.picks.length;}
+function curIdx(){return (STATE&&STATE.picks?STATE.picks.length:0);}
 function onClock(){return ORD[curIdx()];}
 function done(){return curIdx()>=ORD.length;}
 function teamIds(m){return STATE.picks.filter(p=>p.mgr===m).map(p=>p.id);}
@@ -209,15 +209,7 @@ window.startDraft=async()=>{const names=[...Array(NMGR)].map((_,i)=>document.get
 window.resetDraft=async()=>{if(!confirm('Wipe the entire draft for everyone?'))return;STATE=null;ME=null;ADMIN=false;localStorage.clear();try{await firebase.database().ref('wcdraft').remove();}catch(e){}render();};
 function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(window._tt);window._tt=setTimeout(()=>t.classList.remove('show'),1600);}
 let lastPickCount=-1,lastSeat=-1;
-async function tick(){const s=await load();
-  if(s){const changed=!STATE||STATE.picks.length!==s.picks.length;STATE=s;
-    const sm=localStorage.getItem('wc_me');if(sm!==null&&ME===null)ME=+sm;
-    if(localStorage.getItem('wc_admin'))ADMIN=true;
-    // reset timer when the pick or seat changes
-    if(STATE.picks.length!==lastPickCount||onClock()!==lastSeat){lastPickCount=STATE.picks.length;lastSeat=onClock();timerVal=STATE.timer;}
-    if(changed)render();}
-  else if(STATE&&!s){STATE=null;render();}}
-function timerLoop(){if(STATE&&STATE.timer&&!done()&&!timerPaused){if(timerVal==null)timerVal=STATE.timer;
+function timerLoop(){if(STATE&&STATE.picks&&STATE.timer&&!done()&&!timerPaused){if(timerVal==null)timerVal=STATE.timer;
   if(timerVal>0){timerVal--;const t=document.querySelector('.timer');if(t){t.textContent=timerVal;t.className='timer'+(timerVal<=10?' danger':timerVal<=20?' warn':'');}}
   else{const t=document.querySelector('.timer');if(t){t.textContent='0';t.className='timer danger';}
     if(ADMIN){autopick();}}}}
@@ -229,7 +221,8 @@ function timerLoop(){if(STATE&&STATE.timer&&!done()&&!timerPaused){if(timerVal==
   firebase.database().ref('wcdraft').on('value',snap=>{
     const s=snap.val();
     if(!s){if(STATE){STATE=null;render();}return;}
-    const changed=!STATE||JSON.stringify(STATE.picks)!==JSON.stringify(s.picks)||(STATE.picks&&STATE.picks.length!==s.picks.length);
+    if(!s.picks)s.picks=[]; // Firebase drops empty arrays; restore it
+    const changed=!STATE||JSON.stringify(STATE.picks)!==JSON.stringify(s.picks);
     STATE=s;
     if(ME===null&&sm!==null)ME=+sm;
     if(changed){

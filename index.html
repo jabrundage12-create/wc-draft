@@ -145,6 +145,11 @@ function render(){
   if(!STATE){app.innerHTML=setupView();return;}
   if(ME===null){app.innerHTML=pickSeatView();return;}
   let h=headerView()+tabsView();
+  // persistent escape hatch: always let the user change seat or (admin) reset
+  h+=`<div style="display:flex;gap:8px;padding:6px 12px;justify-content:flex-end">
+    <button onclick="changeSeat()" style="background:var(--panel2);border:1px solid var(--line);color:var(--dim);border-radius:6px;padding:5px 10px;font-size:11px;font-family:inherit;cursor:pointer">Change seat</button>
+    <button onclick="resetDraft()" style="background:var(--panel2);border:1px solid var(--line);color:var(--dim);border-radius:6px;padding:5px 10px;font-size:11px;font-family:inherit;cursor:pointer">Reset draft</button>
+  </div>`;
   if(ADMIN&&!done()&&onClock()!==ME)h+=`<div class="adminbar"><span>Admin: ${STATE.names[onClock()]} is on the clock</span><button onclick="autopick()">Auto-pick for them</button><button onclick="toggleTimer()" style="margin-left:6px">${timerPaused?"▶ Resume":"⏸ Pause"} Timer</button></div>`;
   if(TAB==='players')h+=playersView();else if(TAB==='team')h+=teamView();else h+=boardView();
   app.innerHTML=h;
@@ -206,6 +211,7 @@ window.setTab=k=>{TAB=k;render();};window.setPos=p=>{POS=p;render();};window.set
 window.setMe=(i,admin)=>{ME=i;ADMIN=admin;localStorage.setItem('wc_me',i);localStorage.setItem('wc_admin',admin?'1':'');render();};
 window.draftId=draftId;window.autopick=autopick;
 window.toggleTimer=()=>{timerPaused=!timerPaused;render();};
+window.changeSeat=()=>{ME=null;ADMIN=false;localStorage.removeItem('wc_me');localStorage.removeItem('wc_admin');render();};
 window.startDraft=async()=>{const names=[...Array(NMGR)].map((_,i)=>document.getElementById('nm'+i).value.trim()||('Team '+(i+1)));
   const t=parseInt(document.getElementById('timer').value)||0;STATE={names,picks:[],timer:t,created:Date.now()};await save();render();};
 window.resetDraft=async()=>{if(!confirm('Wipe the entire draft for everyone?'))return;STATE=null;ME=null;ADMIN=false;localStorage.clear();try{await firebase.database().ref('wcdraft').remove();}catch(e){}render();};
@@ -217,7 +223,7 @@ function timerLoop(){if(STATE&&STATE.picks&&STATE.timer&&!done()&&!timerPaused){
     if(ADMIN){autopick();}}}}
 (async function(){
   const sm=localStorage.getItem('wc_me');
-  if(localStorage.getItem('wc_admin'))ADMIN=true;
+  // intentionally not auto-applying saved seat/admin on load; user picks each session
   render(); // show setup screen immediately while Firebase connects
   // Firebase real-time listener: all clients update instantly on any pick
   firebase.database().ref('wcdraft').on('value',snap=>{
@@ -226,7 +232,7 @@ function timerLoop(){if(STATE&&STATE.picks&&STATE.timer&&!done()&&!timerPaused){
     if(!s.picks)s.picks=[]; // Firebase drops empty arrays; restore it
     const changed=!STATE||JSON.stringify(STATE.picks)!==JSON.stringify(s.picks);
     STATE=s;
-    if(ME===null&&sm!==null)ME=+sm;
+    // do NOT auto-restore seat; always let the user pick on load to avoid lockouts
     if(changed){
       if(STATE.picks.length!==lastPickCount||onClock()!==lastSeat){
         lastPickCount=STATE.picks.length;lastSeat=onClock();timerVal=STATE.timer||null;

@@ -118,15 +118,17 @@ function unmet(ids){const c=catCounts(ids);return Object.keys(MINS).reduce((s,k)
 function curIdx(){return (STATE&&STATE.picks?STATE.picks.length:0);}
 function onClock(){return ORD[curIdx()];}
 function done(){return curIdx()>=ORD.length;}
-function teamIds(m){return STATE.picks.filter(p=>p.mgr===m).map(p=>p.id);}
+function teamIds(m){return (STATE.picks||[]).filter(p=>p.mgr===m).map(p=>p.id);}
 function needStr(ids){const c=catCounts(ids);return Object.keys(MINS).filter(k=>c[k]<MINS[k]).map(k=>(MINS[k]-c[k])+k).join(' ');}
-function bestAvail(forMgr){const taken={};STATE.picks.forEach(p=>taken[p.id]=1);
+function bestAvail(forMgr){const taken={};(STATE.picks||[]).forEach(p=>taken[p.id]=1);
   const ids=teamIds(forMgr);const left=SQUAD-ids.length-1;
   for(const p of PLAYERS){if(taken[p.id])continue;if(unmet([...ids,p.id])>left)continue;return p.id;}
   // if all blocked by mins, just take best available
   for(const p of PLAYERS){if(!taken[p.id])return p.id;}return null;}
 async function draftId(id,bySeat){
   STATE=await load();
+  if(!STATE){toast("No active draft");return;}
+  if(!STATE.picks)STATE.picks=[];
   const seat=bySeat!==undefined?bySeat:ME;
   if(onClock()!==seat){toast("Not that team's pick");render();return;}
   if(STATE.picks.find(p=>p.id===id)){toast("Already drafted");render();return;}

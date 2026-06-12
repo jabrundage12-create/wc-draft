@@ -18,19 +18,16 @@ header{background:linear-gradient(135deg,#0d1420,#161f30);border-bottom:1px soli
 .tabs{display:flex;background:var(--panel);position:sticky;top:68px;z-index:40;border-bottom:1px solid var(--line)}
 .tab{flex:1;text-align:center;padding:12px 4px;font-weight:700;font-size:11px;letter-spacing:.5px;text-transform:uppercase;color:var(--dim);cursor:pointer;border-bottom:2px solid transparent}
 .tab.active{color:var(--txt);border-bottom-color:var(--accent)}
-/* Rows */
 .row{display:flex;align-items:center;gap:10px;padding:11px 14px;border-bottom:1px solid var(--line);background:var(--panel)}
 .pinfo{flex:1;min-width:0}
 .pname{font-weight:700;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pmeta{font-size:12px;color:var(--dim);margin-top:1px}
-/* Position tags */
 .ptags{display:flex;gap:3px;flex-wrap:wrap;flex:none}
 .ptag{font-size:10px;font-weight:800;padding:2px 5px;border-radius:4px;letter-spacing:.5px;white-space:nowrap}
 .ptag.GK{background:rgba(255,138,61,.18);color:var(--gk)}
 .ptag.CB,.ptag.RB,.ptag.LB,.ptag.DEF{background:rgba(61,165,255,.16);color:var(--def)}
 .ptag.CM,.ptag.CAM{background:rgba(0,214,143,.16);color:var(--mid)}
 .ptag.W,.ptag.ST{background:rgba(255,93,115,.16);color:var(--fwd)}
-/* Buttons */
 .btn{background:var(--accent);color:#04231a;border:none;border-radius:8px;padding:9px 14px;font-weight:800;font-size:13px;font-family:inherit;cursor:pointer;flex:none}
 .btn:disabled{background:var(--panel2);color:var(--dim);cursor:default}
 .btn.sm{padding:6px 10px;font-size:12px}
@@ -38,7 +35,6 @@ header{background:linear-gradient(135deg,#0d1420,#161f30);border-bottom:1px soli
 .btn.danger{background:var(--red);color:#fff}
 .grp{padding:7px 14px 3px;font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--dim);font-weight:800;background:var(--bg)}
 .empty{padding:36px 20px;text-align:center;color:var(--dim);font-size:14px}
-/* Lineup */
 .md-bar{display:flex;gap:6px;overflow-x:auto;padding:10px 12px 8px;scrollbar-width:none;border-bottom:1px solid var(--line)}
 .md-bar::-webkit-scrollbar{display:none}
 .md-chip{background:var(--panel2);border:1px solid var(--line);border-radius:16px;padding:6px 12px;font-size:12px;font-weight:700;color:var(--dim);white-space:nowrap;cursor:pointer;flex:none}
@@ -57,24 +53,21 @@ header{background:linear-gradient(135deg,#0d1420,#161f30);border-bottom:1px soli
 .slot-name{flex:1;font-weight:700;font-size:14px}
 .slot-empty{color:var(--dim);font-style:italic;font-weight:400;font-size:13px}
 .slot-country{font-size:11px;color:var(--dim);font-weight:400;margin-left:5px}
-.lock-banner{background:rgba(255,93,115,.08);border-bottom:1px solid rgba(255,93,115,.2);padding:10px 14px;font-size:12px;color:var(--red);font-weight:700;display:flex;align-items:center;gap:6px}
-.save-bar{position:fixed;bottom:0;left:0;right:0;background:var(--bg);border-top:1px solid var(--line);padding:12px 16px;z-index:30;max-width:760px;margin:0 auto}
+.lock-banner{background:rgba(255,93,115,.08);border-bottom:1px solid rgba(255,93,115,.2);padding:10px 14px;font-size:12px;color:var(--red);font-weight:700}
+.save-bar{position:fixed;bottom:0;left:0;right:0;background:var(--bg);border-top:1px solid var(--line);padding:12px 16px;z-index:30}
 .val-msg{font-size:12px;margin-bottom:8px;font-weight:600}
 .val-msg.ok{color:var(--accent)}
 .val-msg.err{color:var(--red)}
-/* Standings */
-.std-wrap{overflow-x:auto;padding:0}
+.std-wrap{overflow-x:auto}
 .std-table{width:100%;border-collapse:collapse;font-size:13px;min-width:580px}
-.std-table th{padding:8px 8px;text-align:left;color:var(--dim);font-size:10px;text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--line);background:var(--panel2);white-space:nowrap}
+.std-table th{padding:8px;text-align:left;color:var(--dim);font-size:10px;text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--line);background:var(--panel2);white-space:nowrap}
 .std-table td{padding:9px 8px;border-bottom:1px solid var(--line);white-space:nowrap}
 .std-table tr:nth-child(even) td{background:rgba(255,255,255,.02)}
 .rnk{font-family:'Bebas Neue';font-size:20px;color:var(--dim)}
 .tpts{font-family:'Bebas Neue';font-size:22px;color:var(--accent)}
-/* Admin */
 .admin-card{background:rgba(255,210,63,.06);border:1px solid rgba(255,210,63,.2);border-radius:10px;margin:10px 12px;padding:14px}
 .admin-card h3{font-family:'Bebas Neue';font-size:18px;color:var(--accent2);letter-spacing:1px;margin-bottom:10px}
 .admin-btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
-/* Setup */
 .setup{padding:28px 18px;max-width:420px;margin:0 auto}
 .setup h2{font-family:'Bebas Neue';font-size:28px;letter-spacing:1px;margin-bottom:6px}
 .setup p{color:var(--dim);font-size:13px;margin-bottom:18px;line-height:1.5}
@@ -83,10 +76,8 @@ header{background:linear-gradient(135deg,#0d1420,#161f30);border-bottom:1px soli
 .pickme{display:flex;flex-direction:column;gap:8px;margin-top:4px}
 .pickme button{background:var(--panel2);border:1px solid var(--line);color:var(--txt);border-radius:10px;padding:13px 16px;font-size:15px;font-weight:700;font-family:inherit;text-align:left;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
 .pickme button:active{border-color:var(--accent)}
-/* Toast */
 .toast{position:fixed;bottom:110px;left:50%;transform:translateX(-50%);background:var(--accent);color:#04231a;padding:10px 20px;border-radius:24px;font-weight:800;font-size:13px;z-index:200;opacity:0;transition:opacity .2s;pointer-events:none;white-space:nowrap}
 .toast.show{opacity:1}
-/* Modal */
 .modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:100;display:flex;align-items:flex-end;justify-content:center}
 .modal{background:var(--panel);border-radius:16px 16px 0 0;width:100%;max-width:760px;max-height:70vh;overflow-y:auto;padding-bottom:24px}
 .modal-hdr{padding:16px 16px 10px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--panel);z-index:1}
@@ -114,820 +105,699 @@ const db = firebase.database();
 <div class="toast" id="toast"></div>
 <div id="modal"></div>
 <script>
-// ── CONFIG ──────────────────────────────────────────────────────────────────
-const ADMIN_HASH = '170809'; // hash of "1219"
+const ADMIN_HASH = '170809';
 const API_KEY = '715b12701f93c5150fd6cafa92a819c7';
 const NMGR = 8;
 
+const FORMATIONS = {
+  '4-3-3':   [{label:'GK',n:1,accepts:['GK']},{label:'CB',n:2,accepts:['CB']},{label:'FB',n:2,accepts:['RB','LB']},{label:'CM',n:3,accepts:['CM']},{label:'W',n:2,accepts:['W']},{label:'ST',n:1,accepts:['ST']}],
+  '4-2-4':   [{label:'GK',n:1,accepts:['GK']},{label:'CB',n:2,accepts:['CB']},{label:'FB',n:2,accepts:['RB','LB']},{label:'CM',n:2,accepts:['CM']},{label:'W',n:2,accepts:['W']},{label:'ST',n:2,accepts:['ST']}],
+  '4-2-3-1': [{label:'GK',n:1,accepts:['GK']},{label:'CB',n:2,accepts:['CB']},{label:'FB',n:2,accepts:['RB','LB']},{label:'CM',n:2,accepts:['CM']},{label:'CAM',n:1,accepts:['CAM']},{label:'W',n:2,accepts:['W']},{label:'ST',n:1,accepts:['ST']}],
+  '5-2-1-2': [{label:'GK',n:1,accepts:['GK']},{label:'CB',n:3,accepts:['CB']},{label:'WB',n:2,accepts:['RB','LB']},{label:'CM',n:2,accepts:['CM']},{label:'CAM',n:1,accepts:['CAM']},{label:'ST',n:2,accepts:['ST']}],
+  '5-2-3':   [{label:'GK',n:1,accepts:['GK']},{label:'CB',n:3,accepts:['CB']},{label:'WB',n:2,accepts:['RB','LB']},{label:'CM',n:2,accepts:['CM']},{label:'W',n:2,accepts:['W']},{label:'ST',n:1,accepts:['ST']}],
+};
 
-// ── WC 2026 GROUP STAGE SCHEDULE ─────────────────────────────────────────────
-// Format: [home, away, matchday, date, time_et]
-const WC_SCHEDULE = [
-  // MD1 - already played
-  ['Mexico','Ecuador',1,'Jun 11','5:00 PM'],
-  ['Uruguay','Canada',1,'Jun 11','8:00 PM'],
-  // MD1 continuing
-  ['USA','Panama',1,'Jun 12','3:00 PM'],
-  ['Morocco','Portugal',1,'Jun 12','6:00 PM'],
-  ['Spain','Japan',1,'Jun 12','9:00 PM'],
-  ['Germany','Argentina',1,'Jun 13','3:00 PM'],
-  ['France','Saudi Arabia',1,'Jun 13','6:00 PM'],
-  ['Brazil','Croatia',1,'Jun 13','9:00 PM'],
-  ['England','Senegal',1,'Jun 14','3:00 PM'],
-  ['Netherlands','South Korea',1,'Jun 14','6:00 PM'],
-  ['Belgium','Australia',1,'Jun 14','9:00 PM'],
-  ['Italy','Colombia',1,'Jun 15','3:00 PM'],
-  ['Portugal','Czech Republic',1,'Jun 15','6:00 PM'],
-  ['Switzerland','Turkey',1,'Jun 15','9:00 PM'],
-  ['Chile','Bolivia',1,'Jun 16','3:00 PM'],
-  ['Ukraine','Norway',1,'Jun 16','6:00 PM'],
-  // MD2
-  ['Ecuador','Uruguay',2,'Jun 16','9:00 PM'],
-  ['Canada','Mexico',2,'Jun 17','3:00 PM'],
-  ['Japan','Germany',2,'Jun 17','6:00 PM'],
-  ['Argentina','Spain',2,'Jun 17','9:00 PM'],
-  ['Croatia','France',2,'Jun 18','3:00 PM'],
-  ['Saudi Arabia','Brazil',2,'Jun 18','6:00 PM'],
-  ['Panama','Morocco',2,'Jun 18','9:00 PM'],
-  ['Senegal','Netherlands',2,'Jun 19','3:00 PM'],
-  ['South Korea','Belgium',2,'Jun 19','6:00 PM'],
-  ['Australia','England',2,'Jun 19','9:00 PM'],
-  ['Colombia','Portugal',2,'Jun 20','3:00 PM'],
-  ['Czech Republic','Switzerland',2,'Jun 20','6:00 PM'],
-  ['Turkey','Italy',2,'Jun 20','9:00 PM'],
-  ['Norway','Chile',2,'Jun 21','3:00 PM'],
-  ['Bolivia','Ukraine',2,'Jun 21','6:00 PM'],
-  // MD3
-  ['Uruguay','Mexico',3,'Jun 25','3:00 PM'],
-  ['Ecuador','Canada',3,'Jun 25','3:00 PM'],
-  ['Germany','Spain',3,'Jun 25','6:00 PM'],
-  ['Japan','Argentina',3,'Jun 25','6:00 PM'],
-  ['France','Brazil',3,'Jun 26','3:00 PM'],
-  ['Croatia','Saudi Arabia',3,'Jun 26','3:00 PM'],
-  ['Morocco','Colombia',3,'Jun 26','6:00 PM'],
-  ['Portugal','Panama',3,'Jun 26','6:00 PM'],
-  ['Netherlands','Australia',3,'Jun 27','3:00 PM'],
-  ['Senegal','South Korea',3,'Jun 27','3:00 PM'],
-  ['England','Belgium',3,'Jun 27','6:00 PM'],
-  ['Turkey','Czech Republic',3,'Jun 28','3:00 PM'],
-  ['Switzerland','Italy',3,'Jun 28','3:00 PM'],
-  ['Chile','Ukraine',3,'Jun 28','6:00 PM'],
-  ['Norway','Bolivia',3,'Jun 28','6:00 PM'],
+const CATS = [
+  {key:'goals',label:'Goals'},{key:'assists',label:'Assists'},{key:'passes',label:'Passes'},
+  {key:'rating',label:'Rating'},{key:'takeons',label:'Take-ons'},{key:'tackles',label:'Tackles'},
+  {key:'cs',label:'CS'},{key:'savepct',label:'Sv%'}
 ];
 
-function getNextFixture(country){
-  if(!country) return null;
-  const today = new Date();
-  for(const [home,away,md,date,time] of WC_SCHEDULE){
-    if(home===country||away===country){
-      const opp = home===country?away:home;
-      return {md, date, time, opp, home, away};
+const WC_SCHEDULE = [
+  ['Mexico','Ecuador',1,'Jun 11'],['Uruguay','Canada',1,'Jun 11'],
+  ['USA','Panama',1,'Jun 12'],['Morocco','Portugal',1,'Jun 12'],['Spain','Japan',1,'Jun 12'],
+  ['Germany','Argentina',1,'Jun 13'],['France','Saudi Arabia',1,'Jun 13'],['Brazil','Croatia',1,'Jun 13'],
+  ['England','Senegal',1,'Jun 14'],['Netherlands','South Korea',1,'Jun 14'],['Belgium','Australia',1,'Jun 14'],
+  ['Colombia','Italy',1,'Jun 15'],['Portugal','Czech Republic',1,'Jun 15'],['Switzerland','Turkey',1,'Jun 15'],
+  ['Chile','Bolivia',1,'Jun 16'],['Ukraine','Norway',1,'Jun 16'],
+  ['Ecuador','Uruguay',2,'Jun 16'],['Canada','Mexico',2,'Jun 17'],
+  ['Japan','Germany',2,'Jun 17'],['Argentina','Spain',2,'Jun 17'],
+  ['Croatia','France',2,'Jun 18'],['Saudi Arabia','Brazil',2,'Jun 18'],['Panama','Morocco',2,'Jun 18'],
+  ['Senegal','Netherlands',2,'Jun 19'],['South Korea','Belgium',2,'Jun 19'],['Australia','England',2,'Jun 19'],
+  ['Colombia','Portugal',2,'Jun 20'],['Czech Republic','Switzerland',2,'Jun 20'],['Turkey','Italy',2,'Jun 20'],
+  ['Norway','Chile',2,'Jun 21'],['Bolivia','Ukraine',2,'Jun 21'],
+  ['Uruguay','Mexico',3,'Jun 25'],['Ecuador','Canada',3,'Jun 25'],
+  ['Germany','Spain',3,'Jun 25'],['Japan','Argentina',3,'Jun 25'],
+  ['France','Brazil',3,'Jun 26'],['Croatia','Saudi Arabia',3,'Jun 26'],
+  ['Morocco','Colombia',3,'Jun 26'],['Portugal','Panama',3,'Jun 26'],
+  ['Netherlands','Australia',3,'Jun 27'],['Senegal','South Korea',3,'Jun 27'],
+  ['England','Belgium',3,'Jun 27'],['Turkey','Czech Republic',3,'Jun 28'],
+  ['Switzerland','Italy',3,'Jun 28'],['Chile','Ukraine',3,'Jun 28'],['Norway','Bolivia',3,'Jun 28'],
+];
+
+function getNextFixture(country) {
+  for (const [home, away, md, date] of WC_SCHEDULE) {
+    if (home === country || away === country) {
+      const opp = home === country ? away : home;
+      return { md, date, opp };
     }
   }
   return null;
 }
 
-function fixtureStr(country){
-  const f = getNextFixture(country);
-  if(!f) return '';
-  const opp = f.home===country?f.away:f.home;
-  return `${country} vs ${opp} · MD${f.md} · ${f.date}`;
-}
-
-// ── FORMATIONS ──────────────────────────────────────────────────────────────
-// Each group: label shown, how many slots, which position tags are accepted
-const FORMATIONS = {
-  '4-3-3': [
-    {label:'GK', n:1, accepts:['GK']},
-    {label:'CB', n:2, accepts:['CB']},
-    {label:'FB', n:2, accepts:['RB','LB']},
-    {label:'CM', n:3, accepts:['CM']},
-    {label:'W',  n:2, accepts:['W']},
-    {label:'ST', n:1, accepts:['ST']},
-  ],
-  '4-2-4': [
-    {label:'GK', n:1, accepts:['GK']},
-    {label:'CB', n:2, accepts:['CB']},
-    {label:'FB', n:2, accepts:['RB','LB']},
-    {label:'CM', n:2, accepts:['CM']},
-    {label:'W',  n:2, accepts:['W']},
-    {label:'ST', n:2, accepts:['ST']},
-  ],
-  '4-2-3-1': [
-    {label:'GK',  n:1, accepts:['GK']},
-    {label:'CB',  n:2, accepts:['CB']},
-    {label:'FB',  n:2, accepts:['RB','LB']},
-    {label:'CM',  n:2, accepts:['CM']},
-    {label:'CAM', n:1, accepts:['CAM']},
-    {label:'W',   n:2, accepts:['W']},
-    {label:'ST',  n:1, accepts:['ST']},
-  ],
-  '5-2-1-2': [
-    {label:'GK',  n:1, accepts:['GK']},
-    {label:'CB',  n:3, accepts:['CB']},
-    {label:'WB',  n:2, accepts:['RB','LB']},
-    {label:'CM',  n:2, accepts:['CM']},
-    {label:'CAM', n:1, accepts:['CAM']},
-    {label:'ST',  n:2, accepts:['ST']},
-  ],
-  '5-2-3': [
-    {label:'GK', n:1, accepts:['GK']},
-    {label:'CB', n:3, accepts:['CB']},
-    {label:'WB', n:2, accepts:['RB','LB']},
-    {label:'CM', n:2, accepts:['CM']},
-    {label:'W',  n:2, accepts:['W']},
-    {label:'ST', n:1, accepts:['ST']},
-  ],
-};
-
-// ── SCORING CATEGORIES ──────────────────────────────────────────────────────
-const CATS = [
-  {key:'goals',   label:'Goals'},
-  {key:'assists', label:'Assists'},
-  {key:'passes',  label:'Passes'},
-  {key:'rating',  label:'Rating'},
-  {key:'takeons', label:'Take-ons'},
-  {key:'tackles', label:'Tackles'},
-  {key:'cs',      label:'CS'},
-  {key:'savepct', label:'Sv%'},
-];
-
-// ── GLOBAL STATE ────────────────────────────────────────────────────────────
-let PLAYERS_MAP = {}; // id -> player object, loaded from Firebase
-let STATE = null;     // draft STATE (names + picks)
+let PLAYERS_MAP = {};
+let STATE = null;
 let ME = null;
 let ADMIN = false;
 let TAB = 'team';
 let MATCHDAY = 1;
-let LINEUPS = {};       // {md: {seat: [playerIds]}}
-let FORMATIONS_SEL = {};// {md: {seat: 'formationKey'}}
-let LOCKS = {};         // {md: timestamp}
-let STATS = {};         // {md: {playerId: statsObj}}
+let LINEUPS = {};
+let FORMATIONS_SEL = {};
+let LOCKS = {};
+let STATS = {};
+let STANDINGS_MODE = 'roto';
 
-// ── HASH ────────────────────────────────────────────────────────────────────
-function simpleHash(s){let h=0;for(let i=0;i<s.length;i++){h=(Math.imul(31,h)+s.charCodeAt(i))|0;}return Math.abs(h).toString(16);}
-
-// ── PLAYER HELPERS ──────────────────────────────────────────────────────────
-function getPlayer(id){return PLAYERS_MAP[id]||null;}
-function teamIds(seat){
-  if(!STATE||!STATE.picks)return[];
-  return STATE.picks.filter(p=>p.mgr===seat).map(p=>p.id);
-}
-function canFill(player, accepts){
-  return accepts.some(tag=>player.p.includes(tag));
-}
-function posTagsHtml(player){
-  return player.p.map(t=>`<span class="ptag ${t}">${t}</span>`).join('');
+function simpleHash(s) {
+  let h = 0;
+  for (let i = 0; i < s.length; i++) { h = (Math.imul(31, h) + s.charCodeAt(i)) | 0; }
+  return Math.abs(h).toString(16);
 }
 
-// ── FORMATION VALIDATOR ──────────────────────────────────────────────────────
-// lineup is array of {group (label), playerId}
-function validateLineup(lineup, formKey){
-  const fDef = FORMATIONS[formKey];
-  if(!fDef) return {ok:false, msg:'Pick a formation'};
-  const total = fDef.reduce((s,g)=>s+g.n, 0);
-  if(lineup.length !== total) return {ok:false, msg:`Need ${total} players (have ${lineup.length})`};
-  for(const {group, playerId} of lineup){
-    const g = fDef.find(x=>x.label===group);
-    if(!g) return {ok:false, msg:`Unknown slot: ${group}`};
-    const p = getPlayer(playerId);
-    if(!p) return {ok:false, msg:`Player not found`};
-    if(!canFill(p, g.accepts))
-      return {ok:false, msg:`${p.n} (${p.p.join('/')}) can't play ${group}`};
-  }
-  const ids = lineup.map(x=>x.playerId);
-  if(new Set(ids).size !== ids.length) return {ok:false, msg:'Duplicate player'};
-  return {ok:true, msg:'Lineup valid ✓'};
+function getPlayer(id) { return PLAYERS_MAP[id] || null; }
+
+function teamIds(seat) {
+  if (!STATE || !STATE.picks) return [];
+  return STATE.picks.filter(p => p.mgr === seat).map(p => p.id);
 }
 
-// lineup stored in Firebase: array of {group, playerId}
-function getMyLineup(md, seat){
-  const raw = LINEUPS[md]&&LINEUPS[md][seat];
-  if(!raw) return [];
-  // Handle both array and object (Firebase can convert arrays to objects)
-  if(Array.isArray(raw)) return raw;
+function canFill(player, accepts) {
+  return accepts.some(tag => player.p.includes(tag));
+}
+
+function posTagsHtml(player) {
+  return player.p.map(t => '<span class="ptag ' + t + '">' + t + '</span>').join('');
+}
+
+function getMyLineup(md, seat) {
+  const raw = LINEUPS[md] && LINEUPS[md][seat];
+  if (!raw) return [];
+  if (Array.isArray(raw)) return raw;
   return Object.values(raw);
 }
-function getMyFormation(md, seat){
-  return (FORMATIONS_SEL[md]&&FORMATIONS_SEL[md][seat])||'4-3-3';
+
+function getMyFormation(md, seat) {
+  return (FORMATIONS_SEL[md] && FORMATIONS_SEL[md][seat]) || '4-3-3';
 }
 
-// ── SCORING ──────────────────────────────────────────────────────────────────
-function computeStandings(){
-  const totals = {};
-  for(let s=0;s<NMGR;s++){
-    totals[s]={};
-    CATS.forEach(c=>totals[s][c.key]=0);
+function validateLineup(lineup, formKey) {
+  const fDef = FORMATIONS[formKey];
+  if (!fDef) return { ok: false, msg: 'Pick a formation' };
+  const total = fDef.reduce((s, g) => s + g.n, 0);
+  if (lineup.length !== total) return { ok: false, msg: 'Need ' + total + ' players (have ' + lineup.length + ')' };
+  for (const item of lineup) {
+    const g = fDef.find(x => x.label === item.group);
+    if (!g) return { ok: false, msg: 'Unknown slot: ' + item.group };
+    const p = getPlayer(item.playerId);
+    if (!p) return { ok: false, msg: 'Player not found' };
+    if (!canFill(p, g.accepts)) return { ok: false, msg: p.n + ' (' + p.p.join('/') + ') cannot play ' + item.group };
   }
-  Object.keys(STATS).forEach(md=>{
-    const mdStats = STATS[md]||{};
-    const mdLineups = LINEUPS[md]||{};
-    for(let seat=0;seat<NMGR;seat++){
+  const ids = lineup.map(x => x.playerId);
+  if (new Set(ids).size !== ids.length) return { ok: false, msg: 'Duplicate player' };
+  return { ok: true, msg: 'Lineup valid' };
+}
+
+function computeStandings() {
+  const totals = {};
+  for (let s = 0; s < NMGR; s++) {
+    totals[s] = {};
+    CATS.forEach(c => totals[s][c.key] = 0);
+  }
+  Object.keys(STATS).forEach(md => {
+    const mdStats = STATS[md] || {};
+    for (let seat = 0; seat < NMGR; seat++) {
       const lineup = getMyLineup(md, seat);
-      lineup.forEach(({playerId})=>{
-        const st = mdStats[playerId];
-        if(!st) return;
-        const p = getPlayer(playerId);
-        totals[seat].goals   += (st.goals||0);
-        totals[seat].assists += (st.assists||0);
-        totals[seat].passes  += (st.passes||0);
-        totals[seat].rating  += parseFloat(st.rating||0);
-        totals[seat].takeons += (st.takeons||0);
-        totals[seat].tackles += (st.tackles||0);
-        if(p&&(p.p.includes('CB')||p.p.includes('RB')||p.p.includes('LB')||p.p.includes('GK'))&&st.cs) totals[seat].cs++;
-        if(p&&p.p.includes('GK')&&st.faced>0) totals[seat].savepct += (st.saves/st.faced)*100;
+      lineup.forEach(item => {
+        const st = mdStats[item.playerId];
+        if (!st) return;
+        const p = getPlayer(item.playerId);
+        totals[seat].goals   += (st.goals || 0);
+        totals[seat].assists += (st.assists || 0);
+        totals[seat].passes  += (st.passes || 0);
+        totals[seat].rating  += parseFloat(st.rating || 0);
+        totals[seat].takeons += (st.takeons || 0);
+        totals[seat].tackles += (st.tackles || 0);
+        if (p && (p.p.includes('CB') || p.p.includes('RB') || p.p.includes('LB') || p.p.includes('GK')) && st.cs) totals[seat].cs++;
+        if (p && p.p.includes('GK') && st.faced > 0) totals[seat].savepct += (st.saves / st.faced) * 100;
       });
     }
   });
-  const pts={};
-  const catRanks={}; // seat -> cat -> rank points (8 down to 1)
-  for(let s=0;s<NMGR;s++){pts[s]=0;catRanks[s]={};}
-  CATS.forEach(cat=>{
-    const sorted=[...Array(NMGR).keys()].sort((a,b)=>totals[b][cat.key]-totals[a][cat.key]);
-    sorted.forEach((seat,idx)=>{
-      const rp=NMGR-idx;
-      pts[seat]+=rp;
-      catRanks[seat][cat.key]=rp;
+  const pts = {};
+  const catRanks = {};
+  for (let s = 0; s < NMGR; s++) { pts[s] = 0; catRanks[s] = {}; }
+  CATS.forEach(cat => {
+    const sorted = [...Array(NMGR).keys()].sort((a, b) => totals[b][cat.key] - totals[a][cat.key]);
+    sorted.forEach((seat, idx) => {
+      const rp = NMGR - idx;
+      pts[seat] += rp;
+      catRanks[seat][cat.key] = rp;
     });
   });
-  return{totals,pts,catRanks};
+  return { totals, pts, catRanks };
 }
 
-// ── API-FOOTBALL ─────────────────────────────────────────────────────────────
-async function fetchStats(md){
+async function fetchStats(md) {
   toast('Fetching stats...');
-  try{
-    const roundMap={1:'Group Stage - 1',2:'Group Stage - 2',3:'Group Stage - 3',
-      4:'Round of 16',5:'Quarter-finals',6:'Semi-finals',7:'3rd Place Final',8:'Final'};
-    const round=encodeURIComponent(roundMap[md]||`Group Stage - ${md}`);
-    const r=await fetch(`https://v3.football.api-sports.io/fixtures?league=1&season=2026&round=${round}`,
-      {headers:{'x-apisports-key':API_KEY}});
-    const d=await r.json();
-    if(!d.response?.length){toast('No fixtures found');return;}
-    const allStats={};
-    for(const fix of d.response){
-      if(fix.fixture.status.short!=='FT') continue;
-      const sr=await fetch(`https://v3.football.api-sports.io/fixtures/players?fixture=${fix.fixture.id}`,
-        {headers:{'x-apisports-key':API_KEY}});
-      const sd=await sr.json();
-      (sd.response||[]).forEach(team=>{
-        (team.players||[]).forEach(pp=>{
-          const matched=matchName(pp.player.name);
-          if(!matched) return;
-          const s=pp.statistics[0];
-          allStats[matched.id]={
-            goals:   s.goals?.total||0,
-            assists: s.goals?.assists||0,
-            passes:  s.passes?.total||0,
-            rating:  parseFloat(s.games?.rating||0),
-            takeons: s.dribbles?.success||0,
-            tackles: s.tackles?.total||0,
-            cs:      (s.games?.minutes>0)&&((s.goals?.conceded||0)===0),
-            saves:   s.goals?.saves||0,
-            faced:   (s.goals?.saves||0)+(s.goals?.conceded||0),
-            minutes: s.games?.minutes||0,
+  try {
+    const roundMap = {1:'Group Stage - 1',2:'Group Stage - 2',3:'Group Stage - 3',4:'Round of 16',5:'Quarter-finals',6:'Semi-finals',7:'3rd Place Final',8:'Final'};
+    const round = encodeURIComponent(roundMap[md] || 'Group Stage - ' + md);
+    const r = await fetch('https://v3.football.api-sports.io/fixtures?league=1&season=2026&round=' + round, {headers:{'x-apisports-key':API_KEY}});
+    const d = await r.json();
+    if (!d.response || !d.response.length) { toast('No fixtures found'); return; }
+    const allStats = {};
+    for (const fix of d.response) {
+      if (fix.fixture.status.short !== 'FT') continue;
+      const sr = await fetch('https://v3.football.api-sports.io/fixtures/players?fixture=' + fix.fixture.id, {headers:{'x-apisports-key':API_KEY}});
+      const sd = await sr.json();
+      (sd.response || []).forEach(team => {
+        (team.players || []).forEach(pp => {
+          const matched = matchName(pp.player.name);
+          if (!matched) return;
+          const s = pp.statistics[0];
+          allStats[matched.id] = {
+            goals: s.goals && s.goals.total || 0,
+            assists: s.goals && s.goals.assists || 0,
+            passes: s.passes && s.passes.total || 0,
+            rating: parseFloat(s.games && s.games.rating || 0),
+            takeons: s.dribbles && s.dribbles.success || 0,
+            tackles: s.tackles && s.tackles.total || 0,
+            cs: (s.games && s.games.minutes > 0) && ((s.goals && s.goals.conceded || 0) === 0),
+            saves: s.goals && s.goals.saves || 0,
+            faced: (s.goals && s.goals.saves || 0) + (s.goals && s.goals.conceded || 0),
+            minutes: s.games && s.games.minutes || 0,
           };
         });
       });
     }
-    await db.ref(`wcdraft/stats/${md}`).set(allStats);
-    STATS[md]=allStats;
-    toast(`Stats saved for MD ${md}`);
+    await db.ref('wcdraft/stats/' + md).set(allStats);
+    STATS[md] = allStats;
+    toast('Stats saved for MD ' + md);
     render();
-  }catch(e){toast('Error: '+e.message);}
+  } catch(e) { toast('Error: ' + e.message); }
 }
 
-function matchName(apiName){
-  const norm=s=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
-  const n=norm(apiName);
-  const all=Object.values(PLAYERS_MAP);
-  let m=all.find(p=>norm(p.n)===n);
-  if(m) return m;
-  const last=n.split(' ').pop();
-  const cands=all.filter(p=>norm(p.n).endsWith(last));
-  if(cands.length===1) return cands[0];
-  const parts=n.split(' ');
-  if(parts.length>=2){
-    const fl=parts[0]+' '+parts[parts.length-1];
-    m=all.find(p=>{const pn=norm(p.n).split(' ');return pn[0]+' '+pn[pn.length-1]===fl;});
-    if(m) return m;
+function matchName(apiName) {
+  const norm = s => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
+  const n = norm(apiName);
+  const all = Object.values(PLAYERS_MAP);
+  let m = all.find(p => norm(p.n) === n);
+  if (m) return m;
+  const last = n.split(' ').pop();
+  const cands = all.filter(p => norm(p.n).endsWith(last));
+  if (cands.length === 1) return cands[0];
+  const parts = n.split(' ');
+  if (parts.length >= 2) {
+    const fl = parts[0] + ' ' + parts[parts.length - 1];
+    m = all.find(p => { const pn = norm(p.n).split(' '); return pn[0] + ' ' + pn[pn.length - 1] === fl; });
+    if (m) return m;
   }
   return null;
 }
 
 // ── RENDER ────────────────────────────────────────────────────────────────────
-function render(){
-  const app=document.getElementById('app');
-  if(!STATE){app.innerHTML=setupView();return;}
-  if(ME===null){app.innerHTML=seatView();return;}
-  const tabs=[['team','My Team'],['lineup','Lineup'],['squads','Squads'],['standings','Standings']];
-  if(ADMIN) tabs.push(['admin','⚙ Admin']);
-  let h=`<header>
-    <div style="display:flex;justify-content:space-between;align-items:center">
-      <div><div class="title">WC <span>Fantasy</span> 2026</div>
-      <div class="sub">${STATE.names[ME]}${ADMIN?' · Admin':''}</div></div>
-      <button onclick="changeSeat()" style="background:none;border:1px solid var(--line);color:var(--dim);border-radius:6px;padding:6px 10px;font-size:11px;font-family:inherit;cursor:pointer">Switch</button>
-    </div></header>`;
-  h+=`<div class="tabs">${tabs.map(([k,l])=>`<div class="tab ${TAB===k?'active':''}" onclick="setTab('${k}')">${l}</div>`).join('')}</div>`;
-  if(TAB==='team')      h+=teamView();
-  else if(TAB==='lineup')    h+=lineupView();
-  else if(TAB==='squads')    h+=squadsView();
-  else if(TAB==='standings') h+=standingsView();
-  else if(TAB==='admin')     h+=adminView();
-  app.innerHTML=h;
+function render() {
+  const app = document.getElementById('app');
+  if (!STATE) { app.innerHTML = setupView(); return; }
+  if (ME === null) { app.innerHTML = seatView(); return; }
+  const tabs = [['team','My Team'],['lineup','Lineup'],['squads','Squads'],['standings','Standings']];
+  if (ADMIN) tabs.push(['admin','Admin']);
+  let h = '<header><div style="display:flex;justify-content:space-between;align-items:center">'
+    + '<div><div class="title">WC <span>Fantasy</span> 2026</div>'
+    + '<div class="sub">' + STATE.names[ME] + (ADMIN ? ' · Admin' : '') + '</div></div>'
+    + '<button onclick="changeSeat()" style="background:none;border:1px solid var(--line);color:var(--dim);border-radius:6px;padding:6px 10px;font-size:11px;font-family:inherit;cursor:pointer">Switch</button>'
+    + '</div></header>';
+  h += '<div class="tabs">' + tabs.map(function(t) {
+    return '<div class="tab ' + (TAB === t[0] ? 'active' : '') + '" onclick="setTab(\'' + t[0] + '\')">' + t[1] + '</div>';
+  }).join('') + '</div>';
+  if (TAB === 'team')       h += teamView();
+  else if (TAB === 'lineup')     h += lineupView();
+  else if (TAB === 'squads')     h += squadsView();
+  else if (TAB === 'standings')  h += standingsView();
+  else if (TAB === 'admin')      h += adminView();
+  app.innerHTML = h;
 }
 
 // ── TEAM VIEW ─────────────────────────────────────────────────────────────────
-function teamView(){
-  const ids=teamIds(ME);
-  if(!ids.length) return '<div class="empty">Squad not loaded yet. Try refreshing.</div>';
-  // Group by primary position category for display
-  const order=['GK','CB','RB','LB','CM','CAM','W','ST'];
-  const grouped={};
-  order.forEach(k=>grouped[k]=[]);
-  ids.forEach(id=>{
-    const p=getPlayer(id);
-    if(!p) return;
-    const primary=p.p[0];
-    if(grouped[primary]) grouped[primary].push(p);
-    else grouped['CM'].push(p); // fallback
+function teamView() {
+  const ids = teamIds(ME);
+  if (!ids.length) return '<div class="empty">Squad not loaded. Try refreshing.</div>';
+  const order = ['GK','CB','RB','LB','CM','CAM','W','ST'];
+  const labels = {GK:'Goalkeepers',CB:'Centre Backs',RB:'Right Backs',LB:'Left Backs',CM:'Midfielders',CAM:'Attacking Mids',W:'Wingers',ST:'Strikers'};
+  const grouped = {};
+  order.forEach(k => grouped[k] = []);
+  ids.forEach(id => {
+    const p = getPlayer(id);
+    if (!p) return;
+    const primary = p.p[0];
+    if (grouped[primary] !== undefined) grouped[primary].push(p);
+    else grouped['CM'].push(p);
   });
-  const mdStats=STATS[MATCHDAY]||{};
-  let h=`<div style="padding:10px 14px 6px;display:flex;justify-content:space-between;align-items:center;background:var(--panel2);border-bottom:1px solid var(--line)">
-    <div style="font-family:'Bebas Neue';font-size:20px;letter-spacing:1px">${STATE.names[ME]}</div>
-    <div style="font-size:12px;color:var(--dim)">${ids.length} players</div>
-  </div>`;
-  order.forEach(pos=>{
-    if(!grouped[pos]||!grouped[pos].length) return;
-    const labels={GK:'Goalkeepers',CB:'Centre Backs',RB:'Right Backs',LB:'Left Backs',CM:'Central Midfielders',CAM:'Attacking Mids',W:'Wingers',ST:'Strikers'};
-    h+=`<div class="grp">${labels[pos]||pos}</div>`;
-    grouped[pos].forEach(p=>{
-      const st=mdStats[p.id];
-      h+=`<div class="row">
-        <div class="pinfo">
-          <div class="pname">${p.n}${p.s?'<span style="color:var(--accent2);font-size:10px;margin-left:4px">★</span>':''}</div>
-          <div class="pmeta">${p.c}</div>
-        </div>
-        <div class="ptags">${posTagsHtml(p)}</div>
-        ${st?`<span class="stat-pill">${st.rating?st.rating.toFixed(1)+' ⭐':st.goals+'g'}</span>`:''}
-      </div>`;
+  const mdStats = STATS[MATCHDAY] || {};
+  let h = '<div style="padding:10px 14px 6px;display:flex;justify-content:space-between;align-items:center;background:var(--panel2);border-bottom:1px solid var(--line)">'
+    + '<div style="font-family:\'Bebas Neue\';font-size:20px;letter-spacing:1px">' + STATE.names[ME] + '</div>'
+    + '<div style="font-size:12px;color:var(--dim)">' + ids.length + ' players</div></div>';
+  order.forEach(pos => {
+    if (!grouped[pos] || !grouped[pos].length) return;
+    h += '<div class="grp">' + (labels[pos] || pos) + '</div>';
+    grouped[pos].forEach(p => {
+      const st = mdStats[p.id];
+      h += '<div class="row"><div class="pinfo"><div class="pname">' + p.n
+        + (p.s ? '<span style="color:var(--accent2);font-size:10px;margin-left:4px">★</span>' : '')
+        + '</div><div class="pmeta">' + p.c + '</div></div>'
+        + '<div class="ptags">' + posTagsHtml(p) + '</div>'
+        + (st ? '<span class="stat-pill">' + (st.rating ? st.rating.toFixed(1) + ' ⭐' : st.goals + 'g') + '</span>' : '')
+        + '</div>';
     });
   });
   return h;
 }
 
 // ── LINEUP VIEW ───────────────────────────────────────────────────────────────
-function lineupView(){
-  const locked=LOCKS[MATCHDAY];
-  const myLineup=getMyLineup(MATCHDAY,ME);
-  const myForm=getMyFormation(MATCHDAY,ME);
-  const fDef=FORMATIONS[myForm];
-  const ids=teamIds(ME);
+function lineupView() {
+  const locked = LOCKS[MATCHDAY];
+  const myLineup = getMyLineup(MATCHDAY, ME);
+  const myForm = getMyFormation(MATCHDAY, ME);
+  const fDef = FORMATIONS[myForm];
+  const ids = teamIds(ME);
 
-  // MD selector
-  let h='<div class="md-bar">';
-  for(let md=1;md<=8;md++){
-    const lk=LOCKS[md];
-    const has=LINEUPS[md]&&LINEUPS[md][ME]&&getMyLineup(md,ME).length===11;
-    let cls='md-chip';
-    if(md===MATCHDAY) cls+=' active';
-    else if(lk) cls+=' locked';
-    else if(has) cls+=' done';
-    h+=`<div class="${cls}" onclick="setMD(${md})">MD ${md}${lk?' 🔒':has?' ✓':''}</div>`;
+  let h = '<div class="md-bar">';
+  for (let md = 1; md <= 8; md++) {
+    const lk = LOCKS[md];
+    const has = LINEUPS[md] && LINEUPS[md][ME] && getMyLineup(md, ME).length === 11;
+    let cls = 'md-chip' + (md === MATCHDAY ? ' active' : lk ? ' locked' : has ? ' done' : '');
+    h += '<div class="' + cls + '" onclick="setMD(' + md + ')">MD ' + md + (lk ? ' 🔒' : has ? ' ✓' : '') + '</div>';
   }
-  h+='</div>';
+  h += '</div>';
 
-  if(locked) h+=`<div class="lock-banner">🔒 Matchday ${MATCHDAY} locked — lineups cannot be changed</div>`;
+  if (locked) h += '<div class="lock-banner">🔒 Matchday ' + MATCHDAY + ' locked</div>';
 
-  // Formation selector
-  h+=`<div class="form-row">
-    <label>Formation</label>
-    <select ${locked?'disabled':''} onchange="changeFormation(this.value)">
-      ${Object.keys(FORMATIONS).map(f=>`<option ${f===myForm?'selected':''}>${f}</option>`).join('')}
-    </select>
-  </div>`;
+  h += '<div class="form-row"><label>Formation</label>'
+    + '<select ' + (locked ? 'disabled' : '') + ' onchange="changeFormation(this.value)">'
+    + Object.keys(FORMATIONS).map(f => '<option' + (f === myForm ? ' selected' : '') + '>' + f + '</option>').join('')
+    + '</select></div>';
 
-  // Build a map of who is in which slot
-  // myLineup is [{group, playerId}]
-  const slotMap={}; // "group:idx" -> playerId
-  const groupCounts={};
-  myLineup.forEach(({group,playerId})=>{
-    if(!groupCounts[group]) groupCounts[group]=0;
-    slotMap[`${group}:${groupCounts[group]}`]=playerId;
-    groupCounts[group]++;
+  // Build slot map: group -> [playerIds]
+  const slotMap = {};
+  myLineup.forEach(item => {
+    if (!slotMap[item.group]) slotMap[item.group] = [];
+    slotMap[item.group].push(item.playerId);
   });
 
-  // Render slots
-  h+=`<div class="grp">Starting XI</div>`;
-  fDef.forEach(grp=>{
-    for(let i=0;i<grp.n;i++){
-      const pid=slotMap[`${grp.label}:${i}`];
-      const p=pid!=null?getPlayer(pid):null;
-      h+=`<div class="slot ${p?'filled':''}" ${locked?'':'onclick="openPicker(\''+grp.label+'\','+i+')"'}>
-        <div class="slot-lbl">${grp.label}</div>
-        ${p
-          ?`<div class="slot-name">${p.n}<span class="slot-country">${p.c}</span></div>
-            <div class="ptags">${posTagsHtml(p)}</div>
-            ${!locked?`<button class="btn sm ghost" onclick="event.stopPropagation();removeSlot('${grp.label}',${i})">✕</button>`:''}`
-          :`<div class="slot-name"><span class="slot-empty">Tap to pick ${grp.label}</span></div>`
-        }
-      </div>`;
+  h += '<div class="grp">Starting XI</div>';
+  fDef.forEach(grp => {
+    for (let i = 0; i < grp.n; i++) {
+      const pid = slotMap[grp.label] && slotMap[grp.label][i];
+      const p = pid != null ? getPlayer(pid) : null;
+      h += '<div class="slot ' + (p ? 'filled' : '') + '" ' + (locked ? '' : 'onclick="openPicker(\'' + grp.label + '\',' + i + ')"') + '>'
+        + '<div class="slot-lbl">' + grp.label + '</div>';
+      if (p) {
+        h += '<div class="slot-name">' + p.n + '<span class="slot-country">' + p.c + '</span></div>'
+          + '<div class="ptags">' + posTagsHtml(p) + '</div>'
+          + (locked ? '' : '<button class="btn sm ghost" onclick="event.stopPropagation();removeSlot(\'' + grp.label + '\',' + i + ')">✕</button>');
+      } else {
+        h += '<div class="slot-name"><span class="slot-empty">Tap to pick ' + grp.label + '</span></div>';
+      }
+      h += '</div>';
     }
   });
 
-  // Bench
-  const startedIds=myLineup.map(x=>x.playerId);
-  const bench=ids.filter(id=>!startedIds.includes(id));
-  if(bench.length){
-    h+=`<div class="grp">Bench</div>`;
-    bench.forEach(id=>{
-      const p=getPlayer(id);
-      if(!p) return;
-      h+=`<div class="slot bench">
-        <div class="slot-lbl" style="color:var(--dim)">BN</div>
-        <div class="slot-name">${p.n}<span class="slot-country">${p.c}</span></div>
-        <div class="ptags">${posTagsHtml(p)}</div>
-      </div>`;
+  const startedIds = myLineup.map(x => x.playerId);
+  const bench = ids.filter(id => !startedIds.includes(id));
+  if (bench.length) {
+    h += '<div class="grp">Bench</div>';
+    bench.forEach(id => {
+      const p = getPlayer(id);
+      if (!p) return;
+      h += '<div class="slot bench"><div class="slot-lbl" style="color:var(--dim)">BN</div>'
+        + '<div class="slot-name">' + p.n + '<span class="slot-country">' + p.c + '</span></div>'
+        + '<div class="ptags">' + posTagsHtml(p) + '</div></div>';
     });
   }
 
-  if(!locked){
-    const val=validateLineup(myLineup,myForm);
-    h+=`<div class="save-bar">
-      <div class="val-msg ${val.ok?'ok':'err'}">${val.msg}</div>
-      <button class="btn big" ${val.ok?'':'disabled'} onclick="saveLineup()">Save Lineup</button>
-    </div>`;
+  if (!locked) {
+    const val = validateLineup(myLineup, myForm);
+    h += '<div class="save-bar"><div class="val-msg ' + (val.ok ? 'ok' : 'err') + '">' + val.msg + '</div>'
+      + '<button class="btn big" ' + (val.ok ? '' : 'disabled') + ' onclick="saveLineup()">Save Lineup</button></div>';
   }
   return h;
 }
 
-
 // ── SQUADS VIEW ───────────────────────────────────────────────────────────────
-function squadsView(){
-  let h='';
-  for(let seat=0;seat<NMGR;seat++){
+function makePlayerCard(pid, label) {
+  const posColors = {GK:'var(--gk)',CB:'var(--def)',RB:'var(--def)',LB:'var(--def)',FB:'var(--def)',WB:'var(--def)',CM:'var(--mid)',CAM:'var(--mid)',W:'var(--fwd)',ST:'var(--fwd)'};
+  const p = getPlayer(pid);
+  if (!p) return '<div style="flex:1;max-width:90px"></div>';
+  const fix = getNextFixture(p.c);
+  const nextGame = fix ? fix.opp + ' · MD' + fix.md + ' · ' + fix.date : '';
+  const col = posColors[label] || 'var(--dim)';
+  return '<div style="flex:1;max-width:90px;text-align:center;padding:4px 2px">'
+    + '<div style="width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.06);border:2px solid ' + col + ';display:flex;align-items:center;justify-content:center;margin:0 auto 3px;font-size:8px;font-weight:800;color:' + col + '">' + label + '</div>'
+    + '<div style="font-size:11px;font-weight:700;line-height:1.2;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + p.n.split(' ').pop() + '</div>'
+    + '<div style="font-size:9px;color:var(--dim);margin-top:1px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + p.c + '</div>'
+    + (nextGame ? '<div style="font-size:9px;color:var(--accent2);margin-top:2px;line-height:1.2">' + nextGame + '</div>' : '')
+    + '</div>';
+}
+
+function squadsView() {
+  let h = '';
+  for (let seat = 0; seat < NMGR; seat++) {
     const lineup = getMyLineup(MATCHDAY, seat);
     const form = getMyFormation(MATCHDAY, seat);
-    const fDef = FORMATIONS[form];
-    const hasLineup = lineup.length===11;
+    const hasLineup = lineup.length === 11;
 
-    h+=`<div style="background:var(--panel2);border-bottom:2px solid var(--line);padding:10px 14px;display:flex;justify-content:space-between;align-items:center;margin-top:${seat>0?'12px':'0'}">
-      <div style="font-family:'Bebas Neue';font-size:20px;letter-spacing:1px">${STATE.names[seat]}</div>
-      <div style="font-size:12px;color:var(--dim)">${hasLineup?form:'No lineup set'}</div>
-    </div>`;
+    h += '<div style="background:var(--panel2);border-bottom:2px solid var(--line);padding:10px 14px;display:flex;justify-content:space-between;align-items:center' + (seat > 0 ? ';margin-top:10px' : '') + '">'
+      + '<div style="font-family:\'Bebas Neue\';font-size:20px;letter-spacing:1px">' + STATE.names[seat] + '</div>'
+      + '<div style="font-size:12px;color:var(--dim)">' + (hasLineup ? form : 'No lineup set') + '</div></div>';
 
-    if(!hasLineup){
-      h+=`<div style="padding:16px 14px;color:var(--dim);font-size:13px">Lineup not submitted for MD ${MATCHDAY}</div>`;
+    if (!hasLineup) {
+      h += '<div style="padding:16px 14px;color:var(--dim);font-size:13px">Lineup not submitted for MD ' + MATCHDAY + '</div>';
       continue;
     }
 
-    // Build slot map: group -> [playerIds in order]
-    const slotMap={};
-    lineup.forEach(({group,playerId})=>{
-      if(!slotMap[group]) slotMap[group]=[];
-      slotMap[group].push(playerId);
+    // Build slot map
+    const slotMap = {};
+    lineup.forEach(item => {
+      if (!slotMap[item.group]) slotMap[item.group] = [];
+      slotMap[item.group].push(item.playerId);
     });
 
-    const posColors = {GK:'var(--gk)',CB:'var(--def)',RB:'var(--def)',LB:'var(--def)',
-      CM:'var(--mid)',CAM:'var(--mid)',W:'var(--fwd)',ST:'var(--fwd)',WB:'var(--def)',FB:'var(--def)'};
+    // Collect by label
+    const pGK  = (slotMap['GK']  || []).map(pid => ({pid, label:'GK'}));
+    const pCB  = (slotMap['CB']  || []).map(pid => ({pid, label:'CB'}));
+    const pLB  = (slotMap['LB']  || []).map(pid => ({pid, label:'LB'}));
+    const pRB  = (slotMap['RB']  || []).map(pid => ({pid, label:'RB'}));
+    const pFB  = (slotMap['FB']  || []).map(pid => ({pid, label:'FB'}));
+    const pWB  = (slotMap['WB']  || []).map(pid => ({pid, label:'WB'}));
+    const pCM  = (slotMap['CM']  || []).map(pid => ({pid, label:'CM'}));
+    const pCAM = (slotMap['CAM'] || []).map(pid => ({pid, label:'CAM'}));
+    const pW   = (slotMap['W']   || []).map(pid => ({pid, label:'W'}));
+    const pST  = (slotMap['ST']  || []).map(pid => ({pid, label:'ST'}));
 
-    // Collect players by slot label
-    const pGK  = (slotMap['GK']||[]).map(pid=>({pid,label:'GK'}));
-    const pCB  = (slotMap['CB']||[]).map(pid=>({pid,label:'CB'}));
-    const pLB  = (slotMap['LB']||[]).map(pid=>({pid,label:'LB'}));
-    const pRB  = (slotMap['RB']||[]).map(pid=>({pid,label:'RB'}));
-    const pWB  = (slotMap['WB']||[]).map(pid=>({pid,label:'WB'}));
-    const pFB  = (slotMap['FB']||[]).map(pid=>({pid,label:'FB'}));
-    const pCM  = (slotMap['CM']||[]).map(pid=>({pid,label:'CM'}));
-    const pCAM = (slotMap['CAM']||[]).map(pid=>({pid,label:'CAM'}));
-    const pW   = (slotMap['W']||[]).map(pid=>({pid,label:'W'}));
-    const pST  = (slotMap['ST']||[]).map(pid=>({pid,label:'ST'}));
-
-    // DEF row: LB, CB(s), RB — flanks determined by what the formation uses
-    const leftFlank  = pLB[0] || pFB[0] || pWB[0] || null;
-    const rightFlank = pRB[0] || pFB[1] || pWB[1] || null;
-    const defRow = [...(leftFlank?[leftFlank]:[]), ...pCB, ...(rightFlank?[rightFlank]:[])];
+    // DEF row: LB, CBs, RB
+    const leftFlank  = pLB[0]  || pFB[0]  || pWB[0]  || null;
+    const rightFlank = pRB[0]  || pFB[1]  || pWB[1]  || null;
+    const defRow = (leftFlank ? [leftFlank] : []).concat(pCB).concat(rightFlank ? [rightFlank] : []);
 
     // FWD row: W, ST(s), W
     let fwdRow;
-    if(pW.length===2&&pST.length===1)      fwdRow=[pW[0],pST[0],pW[1]];
-    else if(pW.length===2&&pST.length===2) fwdRow=[pW[0],pST[0],pST[1],pW[1]];
-    else if(pW.length===2&&pST.length===0) fwdRow=[pW[0],pW[1]];
-    else if(pW.length===0)                 fwdRow=pST;
-    else                                   fwdRow=[...pW,...pST];
+    if (pW.length === 2 && pST.length === 1)      fwdRow = [pW[0], pST[0], pW[1]];
+    else if (pW.length === 2 && pST.length === 2) fwdRow = [pW[0], pST[0], pST[1], pW[1]];
+    else if (pW.length === 2 && pST.length === 0) fwdRow = [pW[0], pW[1]];
+    else if (pW.length === 0)                     fwdRow = pST;
+    else                                          fwdRow = pW.concat(pST);
 
-    // CAM row centered, CM row centered — separate rows so CAM sits above CMs
-    // Final order top→bottom: FWD, CAM, CM, DEF, GK
-    const displayRows=[];
-    if(fwdRow.length)  displayRows.push(fwdRow);
-    if(pCAM.length)    displayRows.push(pCAM);
-    if(pCM.length)     displayRows.push(pCM);
-    if(defRow.length)  displayRows.push(defRow);
-    if(pGK.length)     displayRows.push(pGK);
+    // Build display rows top to bottom: FWD, CAM, CM, DEF, GK
+    const displayRows = [];
+    if (fwdRow.length) displayRows.push(fwdRow);
+    if (pCAM.length)   displayRows.push(pCAM);
+    if (pCM.length)    displayRows.push(pCM);
+    if (defRow.length) displayRows.push(defRow);
+    if (pGK.length)    displayRows.push(pGK);
 
-    function playerCard(pid,label){
-      const p=getPlayer(pid);
-      if(!p) return \`<div style="flex:1;max-width:88px"></div>\`;
-      const fix=getNextFixture(p.c);
-      const nextGame=fix?\`\${fix.opp} · MD\${fix.md} · \${fix.date}\`:'';
-      const col=posColors[label]||'var(--dim)';
-      return \`<div style="flex:1;max-width:88px;text-align:center;padding:4px 2px">
-        <div style="width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.06);border:2px solid \${col};display:flex;align-items:center;justify-content:center;margin:0 auto 3px;font-size:8px;font-weight:800;color:\${col}">\${label}</div>
-        <div style="font-size:11px;font-weight:700;line-height:1.2;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">\${p.n.split(' ').pop()}</div>
-        <div style="font-size:9px;color:var(--dim);margin-top:1px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">\${p.c}</div>
-        \${nextGame?\`<div style="font-size:9px;color:var(--accent2);margin-top:2px;line-height:1.2">\${nextGame}</div>\`:''}
-      </div>\`;
-    }
-
-    h+=\`<div style="background:var(--panel);padding:4px 0">\`;
-    displayRows.forEach(row=>{
-      if(!row.length) return;
-      h+=\`<div style="display:flex;justify-content:center;gap:4px;padding:5px 8px;flex-wrap:nowrap">\`;
-      row.forEach(({pid,label})=>{ h+=playerCard(pid,label); });
-      h+=\`</div>\`;
+    h += '<div style="background:var(--panel);padding:4px 0">';
+    displayRows.forEach(function(row) {
+      h += '<div style="display:flex;justify-content:center;gap:4px;padding:5px 8px">';
+      row.forEach(function(item) { h += makePlayerCard(item.pid, item.label); });
+      h += '</div>';
     });
-    h+=`</div>`;
 
-    // Bench row
-    const startedIds = lineup.map(x=>x.playerId);
+    // Bench
+    const startedIds = lineup.map(x => x.playerId);
     const allIds = teamIds(seat);
-    const bench = allIds.filter(id=>!startedIds.includes(id));
-    if(bench.length){
-      h+=`<div style="padding:6px 14px 8px;border-top:1px solid var(--line);margin-top:4px">
-        <div style="font-size:10px;color:var(--dim);font-weight:800;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">Bench</div>
-        <div style="display:flex;flex-wrap:wrap;gap:4px">`;
-      bench.forEach(id=>{
-        const p=getPlayer(id);
-        if(!p) return;
-        h+=`<span style="font-size:11px;background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:3px 8px;color:var(--dim)">${p.n.split(' ').pop()}</span>`;
+    const bench = allIds.filter(id => !startedIds.includes(id));
+    if (bench.length) {
+      h += '<div style="padding:6px 14px 8px;border-top:1px solid var(--line)">'
+        + '<div style="font-size:10px;color:var(--dim);font-weight:800;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">Bench</div>'
+        + '<div style="display:flex;flex-wrap:wrap;gap:4px">';
+      bench.forEach(id => {
+        const p = getPlayer(id);
+        if (!p) return;
+        h += '<span style="font-size:11px;background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:3px 8px;color:var(--dim)">' + p.n.split(' ').pop() + '</span>';
       });
-      h+=`</div></div>`;
+      h += '</div></div>';
     }
-    h+=`</div>`;
+    h += '</div>';
   }
-  return h||'<div class="empty">No lineups submitted yet for MD '+MATCHDAY+'</div>';
+  return h || '<div class="empty">No lineups submitted for MD ' + MATCHDAY + '</div>';
 }
 
-
 // ── STANDINGS VIEW ────────────────────────────────────────────────────────────
-let STANDINGS_MODE = 'roto';
+function standingsView() {
+  const { totals, pts, catRanks } = computeStandings();
+  const ranked = [...Array(NMGR).keys()].sort((a, b) => pts[b] - pts[a]);
+  const isRoto = STANDINGS_MODE === 'roto';
 
-function standingsView(){
-  const{totals,pts,catRanks}=computeStandings();
-  const ranked=[...Array(NMGR).keys()].sort((a,b)=>pts[b]-pts[a]);
-  const isRoto = STANDINGS_MODE==='roto';
+  let h = '<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--panel2);border-bottom:1px solid var(--line)">'
+    + '<div style="font-size:11px;color:var(--dim);font-weight:700;text-transform:uppercase;letter-spacing:.5px">'
+    + (isRoto ? 'Roto Points' : 'Raw Stats') + '</div>'
+    + '<div style="display:flex;background:var(--panel);border:1px solid var(--line);border-radius:20px;overflow:hidden">'
+    + '<button onclick="setStandingsMode(\'roto\')" style="padding:5px 12px;font-size:11px;font-weight:700;font-family:inherit;border:none;cursor:pointer;background:' + (isRoto ? 'var(--accent)' : 'transparent') + ';color:' + (isRoto ? '#04231a' : 'var(--dim)') + '">Roto</button>'
+    + '<button onclick="setStandingsMode(\'raw\')" style="padding:5px 12px;font-size:11px;font-weight:700;font-family:inherit;border:none;cursor:pointer;background:' + (!isRoto ? 'var(--accent)' : 'transparent') + ';color:' + (!isRoto ? '#04231a' : 'var(--dim)') + '">Raw</button>'
+    + '</div></div>';
 
-  let h=`<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--panel2);border-bottom:1px solid var(--line)">
-    <div style="font-size:12px;color:var(--dim);font-weight:700;text-transform:uppercase;letter-spacing:.5px">
-      ${isRoto?'Roto Points (rank 8→1 per category)':'Raw Stats'}
-    </div>
-    <div style="display:flex;background:var(--panel);border:1px solid var(--line);border-radius:20px;overflow:hidden">
-      <button onclick="setStandingsMode('roto')" style="padding:5px 12px;font-size:11px;font-weight:700;font-family:inherit;border:none;cursor:pointer;background:${isRoto?'var(--accent)':'transparent'};color:${isRoto?'#04231a':'var(--dim)'}">Roto</button>
-      <button onclick="setStandingsMode('raw')" style="padding:5px 12px;font-size:11px;font-weight:700;font-family:inherit;border:none;cursor:pointer;background:${!isRoto?'var(--accent)':'transparent'};color:${!isRoto?'#04231a':'var(--dim)'}">Raw</button>
-    </div>
-  </div>`;
+  h += '<div class="std-wrap"><table class="std-table"><thead><tr>'
+    + '<th>#</th><th>Team</th>'
+    + CATS.map(c => '<th>' + c.label + '</th>').join('')
+    + '<th>Pts</th></tr></thead><tbody>';
 
-  h+=`<div class="std-wrap"><table class="std-table"><thead><tr>
-    <th>#</th><th>Team</th>
-    ${CATS.map(c=>`<th>${c.label}</th>`).join('')}
-    <th>Pts</th>
-  </tr></thead><tbody>`;
-
-  ranked.forEach((seat,idx)=>{
-    h+=`<tr>
-      <td><span class="rnk">${idx+1}</span></td>
-      <td style="font-weight:700">${STATE.names[seat]}</td>
-      ${CATS.map(c=>{
-        if(isRoto){
-          const rp=catRanks[seat][c.key];
-          const col=rp>=7?'var(--accent)':rp>=5?'var(--txt)':rp<=2?'var(--red)':'var(--dim)';
-          return`<td style="font-weight:700;color:${col}">${rp}</td>`;
-        } else {
-          const v=totals[seat][c.key];
-          return`<td>${typeof v==='number'?v.toFixed(c.key==='rating'||c.key==='savepct'?1:0):0}</td>`;
-        }
-      }).join('')}
-      <td><span class="tpts">${pts[seat]}</span></td>
-    </tr>`;
+  ranked.forEach((seat, idx) => {
+    h += '<tr><td><span class="rnk">' + (idx + 1) + '</span></td>'
+      + '<td style="font-weight:700">' + STATE.names[seat] + '</td>';
+    CATS.forEach(c => {
+      if (isRoto) {
+        const rp = catRanks[seat][c.key];
+        const col = rp >= 7 ? 'var(--accent)' : rp >= 5 ? 'var(--txt)' : rp <= 2 ? 'var(--red)' : 'var(--dim)';
+        h += '<td style="font-weight:700;color:' + col + '">' + rp + '</td>';
+      } else {
+        const v = totals[seat][c.key];
+        h += '<td>' + (typeof v === 'number' ? v.toFixed(c.key === 'rating' || c.key === 'savepct' ? 1 : 0) : 0) + '</td>';
+      }
+    });
+    h += '<td><span class="tpts">' + pts[seat] + '</span></td></tr>';
   });
 
-  h+='</tbody></table></div>';
-  if(!Object.keys(STATS).length)
-    h+='<div class="empty">No stats yet. Admin fetches stats after each matchday.</div>';
+  h += '</tbody></table></div>';
+  if (!Object.keys(STATS).length) h += '<div class="empty">No stats yet.</div>';
   return h;
 }
 
-function setStandingsMode(mode){STANDINGS_MODE=mode;render();}
-
 // ── ADMIN VIEW ────────────────────────────────────────────────────────────────
-function adminView(){
-  let h=`<div class="admin-card">
-    <h3>Matchday Controls</h3>
-    <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
-      <label style="font-size:12px;color:var(--dim);font-weight:700">Matchday</label>
-      <select style="background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:8px 12px;color:var(--txt);font-family:inherit;font-size:14px" onchange="setMD(parseInt(this.value))">
-        ${[1,2,3,4,5,6,7,8].map(md=>`<option value="${md}" ${md===MATCHDAY?'selected':''}>Matchday ${md}${LOCKS[md]?' 🔒':''}</option>`).join('')}
-      </select>
-    </div>
-    <div class="admin-btns">
-      ${LOCKS[MATCHDAY]
-        ?`<button class="btn ghost" onclick="unlockMD()">🔓 Unlock MD ${MATCHDAY}</button>`
-        :`<button class="btn danger" onclick="lockMD()">🔒 Lock MD ${MATCHDAY}</button>`}
-      <button class="btn" onclick="fetchStats(${MATCHDAY})">📊 Fetch Stats</button>
-    </div>
-  </div>
-  <div class="admin-card" style="margin-top:4px">
-    <h3>All Lineups — MD ${MATCHDAY}</h3>`;
-  for(let seat=0;seat<NMGR;seat++){
-    const lineup=getMyLineup(MATCHDAY,seat);
-    const form=getMyFormation(MATCHDAY,seat);
-    h+=`<div style="margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid var(--line)">
-      <div style="font-weight:700;margin-bottom:4px">${STATE.names[seat]}
-        <span style="color:var(--dim);font-size:12px;margin-left:6px">${form}</span>
-        ${lineup.length===11?'<span style="color:var(--accent);font-size:11px;margin-left:6px">✓ submitted</span>':'<span style="color:var(--red);font-size:11px;margin-left:6px">not set</span>'}
-      </div>
-      ${lineup.length?`<div style="font-size:12px;color:var(--dim);line-height:1.8">${lineup.map(({group,playerId})=>{const p=getPlayer(playerId);return`<span style="margin-right:10px">${group}: ${p?p.n:'?'}</span>`;}).join('')}</div>`:''}
-    </div>`;
+function adminView() {
+  let h = '<div class="admin-card"><h3>Matchday Controls</h3>'
+    + '<div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">'
+    + '<label style="font-size:12px;color:var(--dim);font-weight:700">Matchday</label>'
+    + '<select style="background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:8px 12px;color:var(--txt);font-family:inherit;font-size:14px" onchange="setMD(parseInt(this.value))">'
+    + [1,2,3,4,5,6,7,8].map(md => '<option value="' + md + '"' + (md === MATCHDAY ? ' selected' : '') + '>Matchday ' + md + (LOCKS[md] ? ' 🔒' : '') + '</option>').join('')
+    + '</select></div>'
+    + '<div class="admin-btns">'
+    + (LOCKS[MATCHDAY]
+        ? '<button class="btn ghost" onclick="unlockMD()">🔓 Unlock MD ' + MATCHDAY + '</button>'
+        : '<button class="btn danger" onclick="lockMD()">🔒 Lock MD ' + MATCHDAY + '</button>')
+    + '<button class="btn" onclick="fetchStats(' + MATCHDAY + ')">📊 Fetch Stats</button>'
+    + '</div></div>'
+    + '<div class="admin-card" style="margin-top:4px"><h3>All Lineups — MD ' + MATCHDAY + '</h3>';
+  for (let seat = 0; seat < NMGR; seat++) {
+    const lineup = getMyLineup(MATCHDAY, seat);
+    const form = getMyFormation(MATCHDAY, seat);
+    h += '<div style="margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid var(--line)">'
+      + '<div style="font-weight:700;margin-bottom:4px">' + STATE.names[seat]
+      + ' <span style="color:var(--dim);font-size:12px">' + form + '</span>'
+      + (lineup.length === 11
+          ? ' <span style="color:var(--accent);font-size:11px">✓ submitted</span>'
+          : ' <span style="color:var(--red);font-size:11px">not set</span>')
+      + '</div>'
+      + (lineup.length ? '<div style="font-size:12px;color:var(--dim);line-height:1.8">'
+          + lineup.map(item => { const p = getPlayer(item.playerId); return '<span style="margin-right:10px">' + item.group + ': ' + (p ? p.n : '?') + '</span>'; }).join('')
+          + '</div>' : '')
+      + '</div>';
   }
-  h+='</div>';
+  h += '</div>';
   return h;
 }
 
 // ── PICKER MODAL ──────────────────────────────────────────────────────────────
-function openPicker(group, idx){
-  const fDef=FORMATIONS[getMyFormation(MATCHDAY,ME)];
-  const grp=fDef.find(g=>g.label===group);
-  if(!grp) return;
-  const ids=teamIds(ME);
-  const myLineup=getMyLineup(MATCHDAY,ME);
-  const startedIds=myLineup.map(x=>x.playerId);
-  const eligible=ids.filter(id=>{
-    const p=getPlayer(id);
-    if(!p) return false;
-    if(!canFill(p,grp.accepts)) return false;
-    if(startedIds.includes(id)) return false;
+function openPicker(group, idx) {
+  const fDef = FORMATIONS[getMyFormation(MATCHDAY, ME)];
+  const grp = fDef.find(g => g.label === group);
+  if (!grp) return;
+  const ids = teamIds(ME);
+  const myLineup = getMyLineup(MATCHDAY, ME);
+  const startedIds = myLineup.map(x => x.playerId);
+  const eligible = ids.filter(id => {
+    const p = getPlayer(id);
+    if (!p) return false;
+    if (!canFill(p, grp.accepts)) return false;
+    if (startedIds.includes(id)) return false;
     return true;
   });
-  let m=`<div class="modal-bg" onclick="if(event.target===this)closeModal()">
-    <div class="modal">
-      <div class="modal-hdr">
-        <h3>Pick ${group}</h3>
-        <button class="modal-close" onclick="closeModal()">✕</button>
-      </div>`;
-  if(!eligible.length){
-    m+=`<div class="empty">No eligible players for ${group}.<br><span style="font-size:12px">Accepts: ${grp.accepts.join(', ')}</span></div>`;
+  let m = '<div class="modal-bg" onclick="if(event.target===this)closeModal()">'
+    + '<div class="modal"><div class="modal-hdr"><h3>Pick ' + group + '</h3>'
+    + '<button class="modal-close" onclick="closeModal()">✕</button></div>';
+  if (!eligible.length) {
+    m += '<div class="empty">No eligible players for ' + group + '.<br><span style="font-size:12px">Accepts: ' + grp.accepts.join(', ') + '</span></div>';
   } else {
-    eligible.forEach(id=>{
-      const p=getPlayer(id);
-      m+=`<div class="row" style="cursor:pointer" onclick="pickPlayer('${group}',${idx},${id})">
-        <div class="pinfo"><div class="pname">${p.n}</div><div class="pmeta">${p.c}</div></div>
-        <div class="ptags">${posTagsHtml(p)}</div>
-      </div>`;
+    eligible.forEach(id => {
+      const p = getPlayer(id);
+      m += '<div class="row" style="cursor:pointer" onclick="pickPlayer(\'' + group + '\',' + idx + ',' + id + ')">'
+        + '<div class="pinfo"><div class="pname">' + p.n + '</div><div class="pmeta">' + p.c + '</div></div>'
+        + '<div class="ptags">' + posTagsHtml(p) + '</div></div>';
     });
   }
-  m+='</div></div>';
-  document.getElementById('modal').innerHTML=m;
+  m += '</div></div>';
+  document.getElementById('modal').innerHTML = m;
 }
 
-function pickPlayer(group, idx, playerId){
+function pickPlayer(group, idx, playerId) {
   closeModal();
-  let lineup=getMyLineup(MATCHDAY,ME);
-  lineup=lineup.filter(x=>x.playerId!==playerId);
-  lineup.push({group,playerId});
-  if(!LINEUPS[MATCHDAY]) LINEUPS[MATCHDAY]={};
-  LINEUPS[MATCHDAY][ME]=lineup;
-  render();
-}
-
-function removeSlot(group, idx){
-  let lineup=getMyLineup(MATCHDAY,ME);
-  let count=0;
-  lineup=lineup.filter(x=>{
-    if(x.group!==group) return true;
-    if(count===idx){count++;return false;}
-    count++;return true;
+  let lineup = getMyLineup(MATCHDAY, ME);
+  lineup = lineup.filter(x => x.playerId !== playerId);
+  // Remove existing occupant of this exact slot
+  let count = 0;
+  lineup = lineup.filter(x => {
+    if (x.group !== group) return true;
+    if (count === idx) { count++; return false; }
+    count++; return true;
   });
-  if(!LINEUPS[MATCHDAY]) LINEUPS[MATCHDAY]={};
-  LINEUPS[MATCHDAY][ME]=lineup;
+  // Re-insert at correct position
+  const before = lineup.filter(x => x.group === group).slice(0, idx);
+  const after  = lineup.filter(x => x.group === group).slice(idx);
+  const others = lineup.filter(x => x.group !== group);
+  lineup = others.concat(before).concat([{group, playerId}]).concat(after);
+  if (!LINEUPS[MATCHDAY]) LINEUPS[MATCHDAY] = {};
+  LINEUPS[MATCHDAY][ME] = lineup;
   render();
 }
 
-function changeFormation(val){
-  if(!FORMATIONS_SEL[MATCHDAY]) FORMATIONS_SEL[MATCHDAY]={};
-  FORMATIONS_SEL[MATCHDAY][ME]=val;
-  if(!LINEUPS[MATCHDAY]) LINEUPS[MATCHDAY]={};
-  LINEUPS[MATCHDAY][ME]=[];
+function removeSlot(group, idx) {
+  let lineup = getMyLineup(MATCHDAY, ME);
+  let count = 0;
+  lineup = lineup.filter(x => {
+    if (x.group !== group) return true;
+    if (count === idx) { count++; return false; }
+    count++; return true;
+  });
+  if (!LINEUPS[MATCHDAY]) LINEUPS[MATCHDAY] = {};
+  LINEUPS[MATCHDAY][ME] = lineup;
   render();
 }
 
-async function saveLineup(){
-  const lineup=getMyLineup(MATCHDAY,ME);
-  const form=getMyFormation(MATCHDAY,ME);
-  const val=validateLineup(lineup,form);
-  if(!val.ok){toast(val.msg);return;}
-  await db.ref(`wcdraft/lineups/${MATCHDAY}/${ME}`).set(lineup);
-  await db.ref(`wcdraft/formations/${MATCHDAY}/${ME}`).set(form);
+function changeFormation(val) {
+  if (!FORMATIONS_SEL[MATCHDAY]) FORMATIONS_SEL[MATCHDAY] = {};
+  FORMATIONS_SEL[MATCHDAY][ME] = val;
+  if (!LINEUPS[MATCHDAY]) LINEUPS[MATCHDAY] = {};
+  LINEUPS[MATCHDAY][ME] = [];
+  render();
+}
+
+async function saveLineup() {
+  const lineup = getMyLineup(MATCHDAY, ME);
+  const form = getMyFormation(MATCHDAY, ME);
+  const val = validateLineup(lineup, form);
+  if (!val.ok) { toast(val.msg); return; }
+  await db.ref('wcdraft/lineups/' + MATCHDAY + '/' + ME).set(lineup);
+  await db.ref('wcdraft/formations/' + MATCHDAY + '/' + ME).set(form);
   toast('Lineup saved!');
 }
 
-// ── ADMIN ACTIONS ─────────────────────────────────────────────────────────────
-async function lockMD(){
-  if(!confirm(`Lock Matchday ${MATCHDAY}? No lineup changes after this.`)) return;
-  await db.ref(`wcdraft/locks/${MATCHDAY}`).set(Date.now());
-  LOCKS[MATCHDAY]=Date.now();
-  toast(`MD ${MATCHDAY} locked`);render();
+async function lockMD() {
+  if (!confirm('Lock Matchday ' + MATCHDAY + '? No lineup changes after this.')) return;
+  await db.ref('wcdraft/locks/' + MATCHDAY).set(Date.now());
+  LOCKS[MATCHDAY] = Date.now();
+  toast('MD ' + MATCHDAY + ' locked'); render();
 }
-async function unlockMD(){
-  await db.ref(`wcdraft/locks/${MATCHDAY}`).remove();
+
+async function unlockMD() {
+  await db.ref('wcdraft/locks/' + MATCHDAY).remove();
   delete LOCKS[MATCHDAY];
-  toast(`MD ${MATCHDAY} unlocked`);render();
+  toast('MD ' + MATCHDAY + ' unlocked'); render();
 }
 
-// ── AUTH + SETUP ──────────────────────────────────────────────────────────────
-function setupView(){
-  return`<div class="setup">
-    <h2>WC Fantasy <span style="color:var(--accent)">2026</span></h2>
-    <p>Enter the admin PIN to manage the league, or join as a player to set your lineup.</p>
-    <input id="pin" type="password" placeholder="Admin PIN" maxlength="8" onkeydown="if(event.key==='Enter')tryAdmin()">
-    <button class="btn big" onclick="tryAdmin()">Login as Admin</button>
-    <div style="text-align:center;padding:14px;color:var(--dim);font-size:13px">— or —</div>
-    <button class="btn big ghost" onclick="joinPlayer()">Join as Player</button>
-  </div>`;
+// ── AUTH ──────────────────────────────────────────────────────────────────────
+function setupView() {
+  return '<div class="setup"><h2>WC Fantasy <span style="color:var(--accent)">2026</span></h2>'
+    + '<p>Enter the admin PIN to manage the league, or join as a player.</p>'
+    + '<input id="pin" type="password" placeholder="Admin PIN" maxlength="8" onkeydown="if(event.key===\'Enter\')tryAdmin()">'
+    + '<button class="btn big" onclick="tryAdmin()">Login as Admin</button>'
+    + '<div style="text-align:center;padding:14px;color:var(--dim);font-size:13px">— or —</div>'
+    + '<button class="btn big ghost" onclick="joinPlayer()">Join as Player</button></div>';
 }
 
-function seatView(){
-  return`<div class="setup">
-    <h2>Who Are You?</h2>
-    <p>Pick your team to set lineups and track scores.</p>
-    <div class="pickme">
-      ${STATE.names.map((n,i)=>`<button onclick="setMe(${i})">${n}</button>`).join('')}
-    </div>
-    <div style="text-align:center;margin-top:16px">
-      <button onclick="promptAdmin()" style="background:none;border:none;color:var(--dim);font-size:12px;cursor:pointer;font-family:inherit">Admin login</button>
-    </div>
-  </div>`;
+function seatView() {
+  return '<div class="setup"><h2>Who Are You?</h2>'
+    + '<p>Pick your team to set lineups and track scores.</p>'
+    + '<div class="pickme">'
+    + STATE.names.map((n, i) => '<button onclick="setMe(' + i + ')">' + n + '</button>').join('')
+    + '</div>'
+    + '<div style="text-align:center;margin-top:16px">'
+    + '<button onclick="promptAdmin()" style="background:none;border:none;color:var(--dim);font-size:12px;cursor:pointer;font-family:inherit">Admin login</button>'
+    + '</div></div>';
 }
 
-function tryAdmin(){
-  const pin=document.getElementById('pin').value;
-  if(simpleHash(pin)===ADMIN_HASH){ADMIN=true;loadAndRender();}
+function tryAdmin() {
+  const pin = document.getElementById('pin').value;
+  if (simpleHash(pin) === ADMIN_HASH) { ADMIN = true; loadAndRender(); }
   else toast('Wrong PIN');
 }
-function joinPlayer(){loadAndRender();}
-function setMe(i){ME=i;TAB='team';render();}
-function changeSeat(){ME=null;render();}
-function setTab(k){TAB=k;render();}
-function setMD(md){MATCHDAY=md;render();}
-function closeModal(){document.getElementById('modal').innerHTML='';}
-function promptAdmin(){
-  const pin=prompt('Admin PIN:');
-  if(pin&&simpleHash(pin)===ADMIN_HASH){ADMIN=true;ME=0;render();}
-  else if(pin) toast('Wrong PIN');
+function joinPlayer() { loadAndRender(); }
+function setMe(i) { ME = i; TAB = 'team'; render(); }
+function changeSeat() { ME = null; render(); }
+function setTab(k) { TAB = k; render(); }
+function setMD(md) { MATCHDAY = md; render(); }
+function closeModal() { document.getElementById('modal').innerHTML = ''; }
+function setStandingsMode(m) { STANDINGS_MODE = m; render(); }
+function promptAdmin() {
+  const pin = prompt('Admin PIN:');
+  if (pin && simpleHash(pin) === ADMIN_HASH) { ADMIN = true; ME = 0; render(); }
+  else if (pin) toast('Wrong PIN');
 }
 
 // ── LOAD ──────────────────────────────────────────────────────────────────────
-async function loadAndRender(){
+async function loadAndRender() {
   toast('Loading...');
-  const dsnap=await db.ref('wcdraft').once('value');
-  const ds=dsnap.val();
-  if(!ds||!ds.names){toast('No draft data found');render();return;}
-  if(!ds.picks) ds.picks=[];
-  STATE=ds;
-  const psnap=await db.ref('wcdraft/playerdata').once('value');
-  const pd=psnap.val();
-  if(pd){
-    PLAYERS_MAP={};
-    Object.values(pd).forEach(p=>{PLAYERS_MAP[p.id]=p;});
+  const dsnap = await db.ref('wcdraft').once('value');
+  const ds = dsnap.val();
+  if (!ds || !ds.names) { toast('No draft data found'); render(); return; }
+  if (!ds.picks) ds.picks = [];
+  STATE = ds;
+  const psnap = await db.ref('wcdraft/playerdata').once('value');
+  const pd = psnap.val();
+  if (pd) {
+    PLAYERS_MAP = {};
+    Object.values(pd).forEach(p => { PLAYERS_MAP[p.id] = p; });
   } else {
-    toast('Player data missing — ask admin to push players');
+    toast('Player data missing');
   }
-  const [lsnap,fsnap,lksnap,ssnap]=await Promise.all([
+  const [lsnap, fsnap, lksnap, ssnap] = await Promise.all([
     db.ref('wcdraft/lineups').once('value'),
     db.ref('wcdraft/formations').once('value'),
     db.ref('wcdraft/locks').once('value'),
     db.ref('wcdraft/stats').once('value'),
   ]);
-  LINEUPS=lsnap.val()||{};
-  FORMATIONS_SEL=fsnap.val()||{};
-  LOCKS=lksnap.val()||{};
-  STATS=ssnap.val()||{};
-  db.ref('wcdraft/lineups').on('value',s=>{LINEUPS=s.val()||{};render();});
-  db.ref('wcdraft/formations').on('value',s=>{FORMATIONS_SEL=s.val()||{};render();});
-  db.ref('wcdraft/locks').on('value',s=>{LOCKS=s.val()||{};render();});
-  db.ref('wcdraft/stats').on('value',s=>{STATS=s.val()||{};render();});
+  LINEUPS = lsnap.val() || {};
+  FORMATIONS_SEL = fsnap.val() || {};
+  LOCKS = lksnap.val() || {};
+  STATS = ssnap.val() || {};
+  db.ref('wcdraft/lineups').on('value',   s => { LINEUPS = s.val() || {}; render(); });
+  db.ref('wcdraft/formations').on('value', s => { FORMATIONS_SEL = s.val() || {}; render(); });
+  db.ref('wcdraft/locks').on('value',     s => { LOCKS = s.val() || {}; render(); });
+  db.ref('wcdraft/stats').on('value',     s => { STATS = s.val() || {}; render(); });
   render();
 }
 
-// ── TOAST ─────────────────────────────────────────────────────────────────────
-function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(window._tt);window._tt=setTimeout(()=>t.classList.remove('show'),2200);}
+function toast(m) {
+  const t = document.getElementById('toast');
+  t.textContent = m; t.classList.add('show');
+  clearTimeout(window._tt);
+  window._tt = setTimeout(() => t.classList.remove('show'), 2200);
+}
 
-// ── GLOBALS ───────────────────────────────────────────────────────────────────
-window.setTab=setTab;window.setMD=setMD;window.setMe=setMe;window.changeSeat=changeSeat;
-window.tryAdmin=tryAdmin;window.joinPlayer=joinPlayer;window.promptAdmin=promptAdmin;
-window.openPicker=openPicker;window.pickPlayer=pickPlayer;window.removeSlot=removeSlot;
-window.changeFormation=changeFormation;window.saveLineup=saveLineup;
-window.lockMD=lockMD;window.unlockMD=unlockMD;window.fetchStats=fetchStats;
-window.closeModal=closeModal;window.setStandingsMode=setStandingsMode;
+window.setTab = setTab; window.setMD = setMD; window.setMe = setMe;
+window.changeSeat = changeSeat; window.tryAdmin = tryAdmin;
+window.joinPlayer = joinPlayer; window.promptAdmin = promptAdmin;
+window.openPicker = openPicker; window.pickPlayer = pickPlayer;
+window.removeSlot = removeSlot; window.changeFormation = changeFormation;
+window.saveLineup = saveLineup; window.lockMD = lockMD;
+window.unlockMD = unlockMD; window.fetchStats = fetchStats;
+window.closeModal = closeModal; window.setStandingsMode = setStandingsMode;
 
 render();
 </script>

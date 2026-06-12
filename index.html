@@ -616,13 +616,38 @@ function squadsView(){
       if(label==='GK') players.forEach(pid=>gkPlayers.push({pid,label}));
       else if(DEF_LABELS.includes(label)) players.forEach(pid=>defPlayers.push({pid,label}));
       else if(MID_LABELS.includes(label)) players.forEach(pid=>midPlayers.push({pid,label}));
-      else if(FWD_LABELS.includes(label)) players.forEach(pid=>fwdPlayers.push({pid,label}));
+      else if(FWD_LABELS.includes(label)){
+        if(label==='W') players.forEach(pid=>fwdPlayers.push({pid,label}));
+        else fwdPlayers.push(...players.map(pid=>({pid,label}))); // STs collected separately
+      }
     });
 
+    // Sort DEF row: LB on left, CBs in middle, RB on right, WB same logic
+    const defSorted = [
+      ...defPlayers.filter(x=>x.label==='LB'||x.label==='WB'&&defPlayers.filter(d=>d.label==='LB').length===0).slice(0,1),
+      ...defPlayers.filter(x=>x.label==='CB'),
+      ...defPlayers.filter(x=>x.label==='RB'),
+      // catch any WB in correct order if no RB/LB
+      ...defPlayers.filter(x=>x.label==='WB'&&!defPlayers.find(d=>d.label==='LB')&&!defPlayers.find(d=>d.label==='RB')),
+    ];
+    // fallback: if sort produced wrong count, just use original
+    const defRow = defSorted.length===defPlayers.length ? defSorted : defPlayers;
+
     // Order: FWD top, MID, DEF, GK bottom (soccer pitch top-to-bottom reading)
-    if(fwdPlayers.length) displayRows.push(fwdPlayers);
+    // FWD row: interleave so ST sits between Ws (W, ST, W or W, W, ST, ST etc)
+    const fwdWs  = fwdPlayers.filter(x=>x.label==='W');
+    const fwdSTs = fwdPlayers.filter(x=>x.label==='ST');
+    let fwdOrdered = [];
+    if(fwdWs.length===2&&fwdSTs.length===1){
+      fwdOrdered=[fwdWs[0],fwdSTs[0],fwdWs[1]]; // W ST W
+    } else if(fwdWs.length===2&&fwdSTs.length===2){
+      fwdOrdered=[fwdWs[0],fwdSTs[0],fwdSTs[1],fwdWs[1]]; // W ST ST W
+    } else {
+      fwdOrdered=fwdPlayers; // fallback
+    }
+    if(fwdOrdered.length) displayRows.push(fwdOrdered);
     if(midPlayers.length) displayRows.push(midPlayers);
-    if(defPlayers.length) displayRows.push(defPlayers);
+    if(defRow.length)     displayRows.push(defRow);
     if(gkPlayers.length)  displayRows.push(gkPlayers);
 
     const posColors = {GK:'var(--gk)',CB:'var(--def)',RB:'var(--def)',LB:'var(--def)',

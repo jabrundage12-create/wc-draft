@@ -581,97 +581,72 @@ function squadsView(){
       continue;
     }
 
-    // Build slot map
+    // Build slot map: group -> [playerIds in order]
     const slotMap={};
-    const groupCounts={};
     lineup.forEach(({group,playerId})=>{
-      if(!groupCounts[group]) groupCounts[group]=0;
       if(!slotMap[group]) slotMap[group]=[];
       slotMap[group].push(playerId);
-      groupCounts[group]++;
     });
-
-    // Render formation rows
-    // Group slots into rows: GK | DEF/FB/WB | CM/CAM | W/ST
-    const rows = [];
-    fDef.forEach(grp=>{
-      const pids = slotMap[grp.label]||[];
-      rows.push({label:grp.label, players:pids});
-    });
-
-    // Formation card: merge DEF groups (CB+FB, CB+WB) into one row
-    // Group rows by display row: GK alone, all DEF labels together, MID labels together, FWD labels together
-    const DEF_LABELS = ['CB','FB','WB','RB','LB'];
-    const MID_LABELS = ['CM','CAM'];
-    const FWD_LABELS = ['W','ST'];
-
-    // Build merged display rows
-    const displayRows = [];
-    const defPlayers = [];
-    const midPlayers = [];
-    const fwdPlayers = [];
-    const gkPlayers  = [];
-
-    rows.forEach(({label,players})=>{
-      if(label==='GK') players.forEach(pid=>gkPlayers.push({pid,label}));
-      else if(DEF_LABELS.includes(label)) players.forEach(pid=>defPlayers.push({pid,label}));
-      else if(MID_LABELS.includes(label)) players.forEach(pid=>midPlayers.push({pid,label}));
-      else if(FWD_LABELS.includes(label)){
-        if(label==='W') players.forEach(pid=>fwdPlayers.push({pid,label}));
-        else fwdPlayers.push(...players.map(pid=>({pid,label}))); // STs collected separately
-      }
-    });
-
-    // Sort DEF row: LB on left, CBs in middle, RB on right, WB same logic
-    const defSorted = [
-      ...defPlayers.filter(x=>x.label==='LB'||x.label==='WB'&&defPlayers.filter(d=>d.label==='LB').length===0).slice(0,1),
-      ...defPlayers.filter(x=>x.label==='CB'),
-      ...defPlayers.filter(x=>x.label==='RB'),
-      // catch any WB in correct order if no RB/LB
-      ...defPlayers.filter(x=>x.label==='WB'&&!defPlayers.find(d=>d.label==='LB')&&!defPlayers.find(d=>d.label==='RB')),
-    ];
-    // fallback: if sort produced wrong count, just use original
-    const defRow = defSorted.length===defPlayers.length ? defSorted : defPlayers;
-
-    // Order: FWD top, MID, DEF, GK bottom (soccer pitch top-to-bottom reading)
-    // FWD row: interleave so ST sits between Ws (W, ST, W or W, W, ST, ST etc)
-    const fwdWs  = fwdPlayers.filter(x=>x.label==='W');
-    const fwdSTs = fwdPlayers.filter(x=>x.label==='ST');
-    let fwdOrdered = [];
-    if(fwdWs.length===2&&fwdSTs.length===1){
-      fwdOrdered=[fwdWs[0],fwdSTs[0],fwdWs[1]]; // W ST W
-    } else if(fwdWs.length===2&&fwdSTs.length===2){
-      fwdOrdered=[fwdWs[0],fwdSTs[0],fwdSTs[1],fwdWs[1]]; // W ST ST W
-    } else {
-      fwdOrdered=fwdPlayers; // fallback
-    }
-    if(fwdOrdered.length) displayRows.push(fwdOrdered);
-    if(midPlayers.length) displayRows.push(midPlayers);
-    if(defRow.length)     displayRows.push(defRow);
-    if(gkPlayers.length)  displayRows.push(gkPlayers);
 
     const posColors = {GK:'var(--gk)',CB:'var(--def)',RB:'var(--def)',LB:'var(--def)',
       CM:'var(--mid)',CAM:'var(--mid)',W:'var(--fwd)',ST:'var(--fwd)',WB:'var(--def)',FB:'var(--def)'};
 
-    h+=`<div style="background:var(--panel);padding:4px 0">`;
-    displayRows.forEach(rowPlayers=>{
-      if(!rowPlayers.length) return;
-      h+=`<div style="display:flex;justify-content:center;gap:4px;padding:6px 8px;flex-wrap:nowrap">`;
-      rowPlayers.forEach(({pid,label})=>{
-        const p = getPlayer(pid);
-        if(!p){h+=`<div style="width:80px"></div>`;return;}
-        const fix = getNextFixture(p.c);
-        const nextGame = fix?`${fix.opp} · MD${fix.md} · ${fix.date}`:'';
-        const col = posColors[label]||'var(--dim)';
-        h+=`<div style="flex:1;max-width:88px;text-align:center;padding:4px 2px">
-          <div style="width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.06);border:2px solid ${col};display:flex;align-items:center;justify-content:center;margin:0 auto 3px;font-size:8px;font-weight:800;color:${col}">${label}</div>
-          <div style="font-size:11px;font-weight:700;line-height:1.2;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${p.n.split(' ').pop()}</div>
-          <div style="font-size:9px;color:var(--dim);margin-top:1px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${p.c}</div>
-          ${nextGame?`<div style="font-size:9px;color:var(--accent2);margin-top:2px;line-height:1.2">${nextGame}</div>`:''}
-        </div>`;
-      });
-      h+=`</div>`;
+    // Collect players by slot label
+    const pGK  = (slotMap['GK']||[]).map(pid=>({pid,label:'GK'}));
+    const pCB  = (slotMap['CB']||[]).map(pid=>({pid,label:'CB'}));
+    const pLB  = (slotMap['LB']||[]).map(pid=>({pid,label:'LB'}));
+    const pRB  = (slotMap['RB']||[]).map(pid=>({pid,label:'RB'}));
+    const pWB  = (slotMap['WB']||[]).map(pid=>({pid,label:'WB'}));
+    const pFB  = (slotMap['FB']||[]).map(pid=>({pid,label:'FB'}));
+    const pCM  = (slotMap['CM']||[]).map(pid=>({pid,label:'CM'}));
+    const pCAM = (slotMap['CAM']||[]).map(pid=>({pid,label:'CAM'}));
+    const pW   = (slotMap['W']||[]).map(pid=>({pid,label:'W'}));
+    const pST  = (slotMap['ST']||[]).map(pid=>({pid,label:'ST'}));
+
+    // DEF row: LB, CB(s), RB — flanks determined by what the formation uses
+    const leftFlank  = pLB[0] || pFB[0] || pWB[0] || null;
+    const rightFlank = pRB[0] || pFB[1] || pWB[1] || null;
+    const defRow = [...(leftFlank?[leftFlank]:[]), ...pCB, ...(rightFlank?[rightFlank]:[])];
+
+    // FWD row: W, ST(s), W
+    let fwdRow;
+    if(pW.length===2&&pST.length===1)      fwdRow=[pW[0],pST[0],pW[1]];
+    else if(pW.length===2&&pST.length===2) fwdRow=[pW[0],pST[0],pST[1],pW[1]];
+    else if(pW.length===2&&pST.length===0) fwdRow=[pW[0],pW[1]];
+    else if(pW.length===0)                 fwdRow=pST;
+    else                                   fwdRow=[...pW,...pST];
+
+    // CAM row centered, CM row centered — separate rows so CAM sits above CMs
+    // Final order top→bottom: FWD, CAM, CM, DEF, GK
+    const displayRows=[];
+    if(fwdRow.length)  displayRows.push(fwdRow);
+    if(pCAM.length)    displayRows.push(pCAM);
+    if(pCM.length)     displayRows.push(pCM);
+    if(defRow.length)  displayRows.push(defRow);
+    if(pGK.length)     displayRows.push(pGK);
+
+    function playerCard(pid,label){
+      const p=getPlayer(pid);
+      if(!p) return \`<div style="flex:1;max-width:88px"></div>\`;
+      const fix=getNextFixture(p.c);
+      const nextGame=fix?\`\${fix.opp} · MD\${fix.md} · \${fix.date}\`:'';
+      const col=posColors[label]||'var(--dim)';
+      return \`<div style="flex:1;max-width:88px;text-align:center;padding:4px 2px">
+        <div style="width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.06);border:2px solid \${col};display:flex;align-items:center;justify-content:center;margin:0 auto 3px;font-size:8px;font-weight:800;color:\${col}">\${label}</div>
+        <div style="font-size:11px;font-weight:700;line-height:1.2;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">\${p.n.split(' ').pop()}</div>
+        <div style="font-size:9px;color:var(--dim);margin-top:1px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">\${p.c}</div>
+        \${nextGame?\`<div style="font-size:9px;color:var(--accent2);margin-top:2px;line-height:1.2">\${nextGame}</div>\`:''}
+      </div>\`;
+    }
+
+    h+=\`<div style="background:var(--panel);padding:4px 0">\`;
+    displayRows.forEach(row=>{
+      if(!row.length) return;
+      h+=\`<div style="display:flex;justify-content:center;gap:4px;padding:5px 8px;flex-wrap:nowrap">\`;
+      row.forEach(({pid,label})=>{ h+=playerCard(pid,label); });
+      h+=\`</div>\`;
     });
+    h+=`</div>`;
 
     // Bench row
     const startedIds = lineup.map(x=>x.playerId);
@@ -693,8 +668,9 @@ function squadsView(){
   return h||'<div class="empty">No lineups submitted yet for MD '+MATCHDAY+'</div>';
 }
 
+
 // ── STANDINGS VIEW ────────────────────────────────────────────────────────────
-let STANDINGS_MODE = 'roto'; // 'roto' or 'raw'
+let STANDINGS_MODE = 'roto';
 
 function standingsView(){
   const{totals,pts,catRanks}=computeStandings();
@@ -723,9 +699,8 @@ function standingsView(){
       <td style="font-weight:700">${STATE.names[seat]}</td>
       ${CATS.map(c=>{
         if(isRoto){
-          const rp = catRanks[seat][c.key];
-          // Color code: 8=green, 7=light green, 1-2=red-ish
-          const col = rp>=7?'var(--accent)':rp>=5?'var(--txt)':rp<=2?'var(--red)':'var(--dim)';
+          const rp=catRanks[seat][c.key];
+          const col=rp>=7?'var(--accent)':rp>=5?'var(--txt)':rp<=2?'var(--red)':'var(--dim)';
           return`<td style="font-weight:700;color:${col}">${rp}</td>`;
         } else {
           const v=totals[seat][c.key];
@@ -790,9 +765,7 @@ function openPicker(group, idx){
     const p=getPlayer(id);
     if(!p) return false;
     if(!canFill(p,grp.accepts)) return false;
-    // Already in lineup in a different slot? block unless it's this exact slot
-    const inSlot=myLineup.find(x=>x.group===group&&myLineup.indexOf(x)===idx);
-    if(startedIds.includes(id)&&(!inSlot||inSlot.playerId!==id)) return false;
+    if(startedIds.includes(id)) return false;
     return true;
   });
   let m=`<div class="modal-bg" onclick="if(event.target===this)closeModal()">
@@ -818,15 +791,8 @@ function openPicker(group, idx){
 
 function pickPlayer(group, idx, playerId){
   closeModal();
-  let lineup=getMyLineup(MATCHDAY,ME).filter(x=>!(x.group===group&&getMyLineup(MATCHDAY,ME).indexOf(x)===idx));
-  // Remove this player from any other slot
+  let lineup=getMyLineup(MATCHDAY,ME);
   lineup=lineup.filter(x=>x.playerId!==playerId);
-  // Insert at correct group position
-  const before=lineup.filter(x=>x.group===group).slice(0,idx);
-  const after=lineup.filter(x=>x.group===group).slice(idx);
-  const others=lineup.filter(x=>x.group!==group);
-  // Rebuild preserving order: others + before + new + after (by group)
-  // Simpler: just add the pick and let the render sort it
   lineup.push({group,playerId});
   if(!LINEUPS[MATCHDAY]) LINEUPS[MATCHDAY]={};
   LINEUPS[MATCHDAY][ME]=lineup;
@@ -835,7 +801,6 @@ function pickPlayer(group, idx, playerId){
 
 function removeSlot(group, idx){
   let lineup=getMyLineup(MATCHDAY,ME);
-  // Find the idx-th occurrence of this group and remove it
   let count=0;
   lineup=lineup.filter(x=>{
     if(x.group!==group) return true;
@@ -850,7 +815,6 @@ function removeSlot(group, idx){
 function changeFormation(val){
   if(!FORMATIONS_SEL[MATCHDAY]) FORMATIONS_SEL[MATCHDAY]={};
   FORMATIONS_SEL[MATCHDAY][ME]=val;
-  // Clear lineup on formation change
   if(!LINEUPS[MATCHDAY]) LINEUPS[MATCHDAY]={};
   LINEUPS[MATCHDAY][ME]=[];
   render();
@@ -924,13 +888,11 @@ function promptAdmin(){
 // ── LOAD ──────────────────────────────────────────────────────────────────────
 async function loadAndRender(){
   toast('Loading...');
-  // Load draft STATE
   const dsnap=await db.ref('wcdraft').once('value');
   const ds=dsnap.val();
   if(!ds||!ds.names){toast('No draft data found');render();return;}
   if(!ds.picks) ds.picks=[];
   STATE=ds;
-  // Load player data
   const psnap=await db.ref('wcdraft/playerdata').once('value');
   const pd=psnap.val();
   if(pd){
@@ -939,7 +901,6 @@ async function loadAndRender(){
   } else {
     toast('Player data missing — ask admin to push players');
   }
-  // Load season data
   const [lsnap,fsnap,lksnap,ssnap]=await Promise.all([
     db.ref('wcdraft/lineups').once('value'),
     db.ref('wcdraft/formations').once('value'),
@@ -950,7 +911,6 @@ async function loadAndRender(){
   FORMATIONS_SEL=fsnap.val()||{};
   LOCKS=lksnap.val()||{};
   STATS=ssnap.val()||{};
-  // Live listeners
   db.ref('wcdraft/lineups').on('value',s=>{LINEUPS=s.val()||{};render();});
   db.ref('wcdraft/formations').on('value',s=>{FORMATIONS_SEL=s.val()||{};render();});
   db.ref('wcdraft/locks').on('value',s=>{LOCKS=s.val()||{};render();});
@@ -962,14 +922,14 @@ async function loadAndRender(){
 function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(window._tt);window._tt=setTimeout(()=>t.classList.remove('show'),2200);}
 
 // ── GLOBALS ───────────────────────────────────────────────────────────────────
-window.setTab=setTab;window.setMD=setMD;window.setMe=setMe;window.changeSeat=changeSeat;window.setStandingsMode=setStandingsMode;
+window.setTab=setTab;window.setMD=setMD;window.setMe=setMe;window.changeSeat=changeSeat;
 window.tryAdmin=tryAdmin;window.joinPlayer=joinPlayer;window.promptAdmin=promptAdmin;
 window.openPicker=openPicker;window.pickPlayer=pickPlayer;window.removeSlot=removeSlot;
 window.changeFormation=changeFormation;window.saveLineup=saveLineup;
 window.lockMD=lockMD;window.unlockMD=unlockMD;window.fetchStats=fetchStats;
-window.closeModal=closeModal;
+window.closeModal=closeModal;window.setStandingsMode=setStandingsMode;
 
-render(); // show setup screen immediately
+render();
 </script>
 </body>
 </html>

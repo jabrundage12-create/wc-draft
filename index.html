@@ -119,6 +119,81 @@ const ADMIN_HASH = '170809'; // hash of "1219"
 const API_KEY = '715b12701f93c5150fd6cafa92a819c7';
 const NMGR = 8;
 
+
+// ── WC 2026 GROUP STAGE SCHEDULE ─────────────────────────────────────────────
+// Format: [home, away, matchday, date, time_et]
+const WC_SCHEDULE = [
+  // MD1 - already played
+  ['Mexico','Ecuador',1,'Jun 11','5:00 PM'],
+  ['Uruguay','Canada',1,'Jun 11','8:00 PM'],
+  // MD1 continuing
+  ['USA','Panama',1,'Jun 12','3:00 PM'],
+  ['Morocco','Portugal',1,'Jun 12','6:00 PM'],
+  ['Spain','Japan',1,'Jun 12','9:00 PM'],
+  ['Germany','Argentina',1,'Jun 13','3:00 PM'],
+  ['France','Saudi Arabia',1,'Jun 13','6:00 PM'],
+  ['Brazil','Croatia',1,'Jun 13','9:00 PM'],
+  ['England','Senegal',1,'Jun 14','3:00 PM'],
+  ['Netherlands','South Korea',1,'Jun 14','6:00 PM'],
+  ['Belgium','Australia',1,'Jun 14','9:00 PM'],
+  ['Italy','Colombia',1,'Jun 15','3:00 PM'],
+  ['Portugal','Czech Republic',1,'Jun 15','6:00 PM'],
+  ['Switzerland','Turkey',1,'Jun 15','9:00 PM'],
+  ['Chile','Bolivia',1,'Jun 16','3:00 PM'],
+  ['Ukraine','Norway',1,'Jun 16','6:00 PM'],
+  // MD2
+  ['Ecuador','Uruguay',2,'Jun 16','9:00 PM'],
+  ['Canada','Mexico',2,'Jun 17','3:00 PM'],
+  ['Japan','Germany',2,'Jun 17','6:00 PM'],
+  ['Argentina','Spain',2,'Jun 17','9:00 PM'],
+  ['Croatia','France',2,'Jun 18','3:00 PM'],
+  ['Saudi Arabia','Brazil',2,'Jun 18','6:00 PM'],
+  ['Panama','Morocco',2,'Jun 18','9:00 PM'],
+  ['Senegal','Netherlands',2,'Jun 19','3:00 PM'],
+  ['South Korea','Belgium',2,'Jun 19','6:00 PM'],
+  ['Australia','England',2,'Jun 19','9:00 PM'],
+  ['Colombia','Portugal',2,'Jun 20','3:00 PM'],
+  ['Czech Republic','Switzerland',2,'Jun 20','6:00 PM'],
+  ['Turkey','Italy',2,'Jun 20','9:00 PM'],
+  ['Norway','Chile',2,'Jun 21','3:00 PM'],
+  ['Bolivia','Ukraine',2,'Jun 21','6:00 PM'],
+  // MD3
+  ['Uruguay','Mexico',3,'Jun 25','3:00 PM'],
+  ['Ecuador','Canada',3,'Jun 25','3:00 PM'],
+  ['Germany','Spain',3,'Jun 25','6:00 PM'],
+  ['Japan','Argentina',3,'Jun 25','6:00 PM'],
+  ['France','Brazil',3,'Jun 26','3:00 PM'],
+  ['Croatia','Saudi Arabia',3,'Jun 26','3:00 PM'],
+  ['Morocco','Colombia',3,'Jun 26','6:00 PM'],
+  ['Portugal','Panama',3,'Jun 26','6:00 PM'],
+  ['Netherlands','Australia',3,'Jun 27','3:00 PM'],
+  ['Senegal','South Korea',3,'Jun 27','3:00 PM'],
+  ['England','Belgium',3,'Jun 27','6:00 PM'],
+  ['Turkey','Czech Republic',3,'Jun 28','3:00 PM'],
+  ['Switzerland','Italy',3,'Jun 28','3:00 PM'],
+  ['Chile','Ukraine',3,'Jun 28','6:00 PM'],
+  ['Norway','Bolivia',3,'Jun 28','6:00 PM'],
+];
+
+function getNextFixture(country){
+  if(!country) return null;
+  const today = new Date();
+  for(const [home,away,md,date,time] of WC_SCHEDULE){
+    if(home===country||away===country){
+      const opp = home===country?away:home;
+      return {md, date, time, opp, home, away};
+    }
+  }
+  return null;
+}
+
+function fixtureStr(country){
+  const f = getNextFixture(country);
+  if(!f) return '';
+  const opp = f.home===country?f.away:f.home;
+  return `${country} vs ${opp} · MD${f.md} · ${f.date}`;
+}
+
 // ── FORMATIONS ──────────────────────────────────────────────────────────────
 // Each group: label shown, how many slots, which position tags are accepted
 const FORMATIONS = {
@@ -345,7 +420,7 @@ function render(){
   const app=document.getElementById('app');
   if(!STATE){app.innerHTML=setupView();return;}
   if(ME===null){app.innerHTML=seatView();return;}
-  const tabs=[['team','My Team'],['lineup','Lineup'],['standings','Standings']];
+  const tabs=[['team','My Team'],['lineup','Lineup'],['squads','Squads'],['standings','Standings']];
   if(ADMIN) tabs.push(['admin','⚙ Admin']);
   let h=`<header>
     <div style="display:flex;justify-content:space-between;align-items:center">
@@ -356,6 +431,7 @@ function render(){
   h+=`<div class="tabs">${tabs.map(([k,l])=>`<div class="tab ${TAB===k?'active':''}" onclick="setTab('${k}')">${l}</div>`).join('')}</div>`;
   if(TAB==='team')      h+=teamView();
   else if(TAB==='lineup')    h+=lineupView();
+  else if(TAB==='squads')    h+=squadsView();
   else if(TAB==='standings') h+=standingsView();
   else if(TAB==='admin')     h+=adminView();
   app.innerHTML=h;
@@ -483,6 +559,88 @@ function lineupView(){
     </div>`;
   }
   return h;
+}
+
+
+// ── SQUADS VIEW ───────────────────────────────────────────────────────────────
+function squadsView(){
+  let h='';
+  for(let seat=0;seat<NMGR;seat++){
+    const lineup = getMyLineup(MATCHDAY, seat);
+    const form = getMyFormation(MATCHDAY, seat);
+    const fDef = FORMATIONS[form];
+    const hasLineup = lineup.length===11;
+
+    h+=`<div style="background:var(--panel2);border-bottom:2px solid var(--line);padding:10px 14px;display:flex;justify-content:space-between;align-items:center;margin-top:${seat>0?'12px':'0'}">
+      <div style="font-family:'Bebas Neue';font-size:20px;letter-spacing:1px">${STATE.names[seat]}</div>
+      <div style="font-size:12px;color:var(--dim)">${hasLineup?form:'No lineup set'}</div>
+    </div>`;
+
+    if(!hasLineup){
+      h+=`<div style="padding:16px 14px;color:var(--dim);font-size:13px">Lineup not submitted for MD ${MATCHDAY}</div>`;
+      continue;
+    }
+
+    // Build slot map
+    const slotMap={};
+    const groupCounts={};
+    lineup.forEach(({group,playerId})=>{
+      if(!groupCounts[group]) groupCounts[group]=0;
+      if(!slotMap[group]) slotMap[group]=[];
+      slotMap[group].push(playerId);
+      groupCounts[group]++;
+    });
+
+    // Render formation rows
+    // Group slots into rows: GK | DEF/FB/WB | CM/CAM | W/ST
+    const rows = [];
+    fDef.forEach(grp=>{
+      const pids = slotMap[grp.label]||[];
+      rows.push({label:grp.label, players:pids});
+    });
+
+    // Formation card: render each position group as a row
+    h+=`<div style="background:var(--panel);padding:4px 0">`;
+    rows.forEach(({label,players})=>{
+      if(!players.length) return;
+      h+=`<div style="display:flex;justify-content:center;gap:6px;padding:6px 10px;flex-wrap:wrap">`;
+      players.forEach(pid=>{
+        const p = getPlayer(pid);
+        if(!p){h+=`<div style="width:80px"></div>`;return;}
+        const fix = getNextFixture(p.c);
+        const nextGame = fix?`${fix.opp} · MD${fix.md} · ${fix.date}`:'';
+        // Position color
+        const posColors = {GK:'var(--gk)',CB:'var(--def)',RB:'var(--def)',LB:'var(--def)',
+          CM:'var(--mid)',CAM:'var(--mid)',W:'var(--fwd)',ST:'var(--fwd)',WB:'var(--def)',FB:'var(--def)'};
+        const col = posColors[label]||'var(--dim)';
+        h+=`<div style="width:90px;text-align:center;padding:6px 4px">
+          <div style="width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.06);border:2px solid ${col};display:flex;align-items:center;justify-content:center;margin:0 auto 4px;font-size:9px;font-weight:800;color:${col}">${label}</div>
+          <div style="font-size:11px;font-weight:700;line-height:1.3;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${p.n.split(' ').pop()}</div>
+          <div style="font-size:9px;color:var(--dim);margin-top:1px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${p.c}</div>
+          ${nextGame?`<div style="font-size:9px;color:var(--accent2);margin-top:2px;line-height:1.3">${nextGame}</div>`:''}
+        </div>`;
+      });
+      h+=`</div>`;
+    });
+
+    // Bench row
+    const startedIds = lineup.map(x=>x.playerId);
+    const allIds = teamIds(seat);
+    const bench = allIds.filter(id=>!startedIds.includes(id));
+    if(bench.length){
+      h+=`<div style="padding:6px 14px 8px;border-top:1px solid var(--line);margin-top:4px">
+        <div style="font-size:10px;color:var(--dim);font-weight:800;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">Bench</div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px">`;
+      bench.forEach(id=>{
+        const p=getPlayer(id);
+        if(!p) return;
+        h+=`<span style="font-size:11px;background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:3px 8px;color:var(--dim)">${p.n.split(' ').pop()}</span>`;
+      });
+      h+=`</div></div>`;
+    }
+    h+=`</div>`;
+  }
+  return h||'<div class="empty">No lineups submitted yet for MD '+MATCHDAY+'</div>';
 }
 
 // ── STANDINGS VIEW ────────────────────────────────────────────────────────────

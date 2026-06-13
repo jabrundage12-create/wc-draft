@@ -165,6 +165,7 @@ let LINEUPS = {};
 let FORMATIONS_SEL = {};
 let LOCKS = {};
 let STATS = {};
+let ROSTERS = {};
 let STANDINGS_MODE = 'roto';
 
 function simpleHash(s) {
@@ -176,6 +177,10 @@ function simpleHash(s) {
 function getPlayer(id) { return PLAYERS_MAP[id] || null; }
 
 function teamIds(seat) {
+  if (ROSTERS && ROSTERS[seat]) {
+    const r = ROSTERS[seat];
+    return Array.isArray(r) ? r : Object.values(r);
+  }
   if (!STATE || !STATE.picks) return [];
   return STATE.picks.filter(p => p.mgr === seat).map(p => p.id);
 }
@@ -318,7 +323,7 @@ function render() {
   const app = document.getElementById('app');
   if (!STATE) { app.innerHTML = setupView(); return; }
   if (ME === null) { app.innerHTML = seatView(); return; }
-  const tabs = [['team','My Team'],['lineup','Lineup'],['squads','Squads'],['standings','Standings']];
+  const tabs = [['team','My Team'],['lineup','Lineup'],['fa','Free Agents'],['squads','Squads'],['standings','Standings']];
   if (ADMIN) tabs.push(['admin','Admin']);
   let h = '<header><div style="display:flex;justify-content:space-between;align-items:center">'
     + '<div><div class="title">WC <span>Fantasy</span> 2026</div>'
@@ -330,6 +335,7 @@ function render() {
   }).join('') + '</div>';
   if (TAB === 'team')       h += teamView();
   else if (TAB === 'lineup')     h += lineupView();
+  else if (TAB === 'fa')         h += freeAgentsView();
   else if (TAB === 'squads')     h += squadsView();
   else if (TAB === 'standings')  h += standingsView();
   else if (TAB === 'admin')      h += adminView();
@@ -538,6 +544,91 @@ function squadsView() {
     h += '</div>';
   }
   return h || '<div class="empty">No lineups submitted for MD ' + MATCHDAY + '</div>';
+}
+
+// ── FREE AGENTS VIEW ──────────────────────────────────────────────────────────
+function draftedPlayerIds() {
+  // All player ids currently on any roster (respecting overrides)
+  const taken = {};
+  for (let s = 0; s < NMGR; s++) {
+    teamIds(s).forEach(id => { taken[id] = true; });
+  }
+  return taken;
+}
+
+function topFreeAgentsByPos() {
+  // Returns {posLabel: [players]} top 10 undrafted per position bucket
+  const taken = draftedPlayerIds();
+  const buckets = { GK: [], CB: [], RB: [], LB: [], CM: [], CAM: [], W: [], ST: [] };
+  const all = Object.values(PLAYERS_MAP).filter(p => !taken[p.id]);
+  // Sort by rank (lower rank number = better)
+  all.sort((a, b) => (a.rank || 9999) - (b.rank || 9999));
+  all.forEach(p => {
+    const primary = p.p[0];
+    if (buckets[primary] !== undefined && buckets[primary].length < 10) {
+      buckets[primary].push(p);
+    }
+  });
+  return buckets;
+}
+
+function freeAgentsView() {
+  const locked = LOCKS[MATCHDAY];
+  const buckets = topFreeAgentsByPos();
+  const labels = { GK:'Goalkeepers', CB:'Centre Backs', RB:'Right Backs', LB:'Left Backs', CM:'Midfielders', CAM:'Attacking Mids', W:'Wingers', ST:'Strikers' };
+  const order = ['GK','CB','RB','LB','CM','CAM','W','ST'];
+  let h = '<div style="padding:10px 14px;background:var(--panel2);border-bottom:1px solid var(--line);font-size:12px;color:var(--dim)">'
+    + 'Top available players by position. Adding a player makes you drop one to stay at 18.</div>';
+  if (locked) h += '<div class="lock-banner">🔒 MD ' + MATCHDAY + ' locked. Adds/drops are frozen until unlocked.</div>';
+  order.forEach(pos => {
+    const list = buckets[pos];
+    if (!list || !list.length) return;
+    h += '<div class="grp">' + (labels[pos] || pos) + '</div>';
+    list.forEach(p => {
+      h += '<div class="row"><div class="pinfo"><div class="pname">' + p.n + '</div>'
+        + '<div class="pmeta">' + p.c + '</div></div>'
+        + '<div class="ptags">' + posTagsHtml(p) + '</div>'
+        + (locked ? '' : '<button class="btn sm" onclick="startAdd(' + p.id + ')">Add</button>')
+        + '</div>';
+    });
+  });
+  return h;
+}
+
+function startAdd(playerId) {
+  // Open a modal to choose who to drop
+  const ids = teamIds(ME);
+  const newP = getPlayer(playerId);
+  let m = '<div class="modal-bg" onclick="if(event.target===this)closeModal()">'
+    + '<div class="modal"><div class="modal-hdr"><h3>Drop a player to add ' + (newP ? newP.n : '') + '</h3>'
+    + '<button class="modal-close" onclick="closeModal()">✕</button></div>';
+  ids.forEach(id => {
+    const p = getPlayer(id);
+    if (!p) return;
+    m += '<div class="row" style="cursor:pointer" onclick="doAddDrop(' + playerId + ',' + id + ')">'
+      + '<div class="pinfo"><div class="pname">' + p.n + '</div><div class="pmeta">' + p.c + '</div></div>'
+      + '<div class="ptags">' + posTagsHtml(p) + '</div></div>';
+  });
+  m += '</div></div>';
+  document.getElementById('modal').innerHTML = m;
+}
+
+async function doAddDrop(addId, dropId) {
+  closeModal();
+  let roster = teamIds(ME).slice();
+  roster = roster.filter(id => id !== dropId);
+  roster.push(addId);
+  ROSTERS[ME] = roster;
+  await db.ref('wcdraft/rosters/' + ME).set(roster);
+  // Also remove dropped player from any unlocked lineup so it doesn't linger
+  const lineup = getMyLineup(MATCHDAY, ME).filter(x => x.playerId !== dropId);
+  if (lineup.length !== getMyLineup(MATCHDAY, ME).length) {
+    LINEUPS[MATCHDAY][ME] = lineup;
+    await db.ref('wcdraft/lineups/' + MATCHDAY + '/' + ME).set(lineup);
+  }
+  const ap = getPlayer(addId), dp = getPlayer(dropId);
+  toast('Added ' + (ap ? ap.n : '') + ', dropped ' + (dp ? dp.n : ''));
+  render();
 }
 
 // ── STANDINGS VIEW ────────────────────────────────────────────────────────────
@@ -766,20 +857,23 @@ async function loadAndRender() {
   } else {
     toast('Player data missing');
   }
-  const [lsnap, fsnap, lksnap, ssnap] = await Promise.all([
+  const [lsnap, fsnap, lksnap, ssnap, rsnap] = await Promise.all([
     db.ref('wcdraft/lineups').once('value'),
     db.ref('wcdraft/formations').once('value'),
     db.ref('wcdraft/locks').once('value'),
     db.ref('wcdraft/stats').once('value'),
+    db.ref('wcdraft/rosters').once('value'),
   ]);
   LINEUPS = lsnap.val() || {};
   FORMATIONS_SEL = fsnap.val() || {};
   LOCKS = lksnap.val() || {};
   STATS = ssnap.val() || {};
+  ROSTERS = rsnap.val() || {};
   db.ref('wcdraft/lineups').on('value',   s => { LINEUPS = s.val() || {}; render(); });
   db.ref('wcdraft/formations').on('value', s => { FORMATIONS_SEL = s.val() || {}; render(); });
   db.ref('wcdraft/locks').on('value',     s => { LOCKS = s.val() || {}; render(); });
   db.ref('wcdraft/stats').on('value',     s => { STATS = s.val() || {}; render(); });
+  db.ref('wcdraft/rosters').on('value',   s => { ROSTERS = s.val() || {}; render(); });
   render();
 }
 
@@ -798,6 +892,7 @@ window.removeSlot = removeSlot; window.changeFormation = changeFormation;
 window.saveLineup = saveLineup; window.lockMD = lockMD;
 window.unlockMD = unlockMD; window.fetchStats = fetchStats;
 window.closeModal = closeModal; window.setStandingsMode = setStandingsMode;
+window.startAdd = startAdd; window.doAddDrop = doAddDrop;
 
 render();
 </script>

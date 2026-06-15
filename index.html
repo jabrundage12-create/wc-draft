@@ -177,9 +177,9 @@ function simpleHash(s) {
 function getPlayer(id) { return PLAYERS_MAP[id] || null; }
 
 function teamIds(seat) {
-  if (ROSTERS && ROSTERS[seat]) {
-    const r = ROSTERS[seat];
-    return Array.isArray(r) ? r : Object.values(r);
+  const rosterEntry = ROSTERS && (ROSTERS[seat] || ROSTERS[String(seat)]);
+  if (rosterEntry) {
+    return Array.isArray(rosterEntry) ? rosterEntry : Object.values(rosterEntry);
   }
   if (!STATE || !STATE.picks) return [];
   return STATE.picks.filter(p => p.mgr === seat).map(p => p.id);
@@ -557,22 +557,27 @@ function draftedPlayerIds() {
 }
 
 function topFreeAgentsByPos() {
-  // Returns {posLabel: [players]} top 10 undrafted per position bucket
+  if (!Object.keys(PLAYERS_MAP).length) return {};
   const taken = draftedPlayerIds();
   const buckets = { GK: [], CB: [], RB: [], LB: [], CM: [], CAM: [], W: [], ST: [] };
+  function primaryBucket(p) {
+    const tags = p.p || [];
+    for (const t of tags) {
+      if (buckets[t] !== undefined) return t;
+    }
+    return null; // skip players with no matching bucket (generic DEF, etc.)
+  }
   const all = Object.values(PLAYERS_MAP).filter(p => !taken[p.id]);
-  // Sort by rank (lower rank number = better)
   all.sort((a, b) => (a.rank || 9999) - (b.rank || 9999));
   all.forEach(p => {
-    const primary = p.p[0];
-    if (buckets[primary] !== undefined && buckets[primary].length < 10) {
-      buckets[primary].push(p);
-    }
+    const bucket = primaryBucket(p);
+    if (bucket && buckets[bucket].length < 10) buckets[bucket].push(p);
   });
   return buckets;
 }
 
 function freeAgentsView() {
+  if (!Object.keys(PLAYERS_MAP).length) return '<div class="empty">Player data loading...</div>';
   const locked = LOCKS[MATCHDAY];
   const buckets = topFreeAgentsByPos();
   const labels = { GK:'Goalkeepers', CB:'Centre Backs', RB:'Right Backs', LB:'Left Backs', CM:'Midfielders', CAM:'Attacking Mids', W:'Wingers', ST:'Strikers' };

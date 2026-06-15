@@ -241,7 +241,9 @@ function computeStandings() {
         totals[seat].rating  += parseFloat(st.rating || 0);
         totals[seat].takeons += (st.takeons || 0);
         totals[seat].tackles += (st.tackles || 0);
-        if (p && (p.p.includes('CB') || p.p.includes('RB') || p.p.includes('LB') || p.p.includes('GK')) && st.cs) totals[seat].cs++;
+        // CS: only GK counts, and only once per actual clean sheet kept
+        // Track which (seat, md, playerCountry) combos already gave a CS
+        if (p && p.p.includes('GK') && st.cs) totals[seat].cs++;
         if (p && p.p.includes('GK') && st.faced > 0) totals[seat].savepct += (st.saves / st.faced) * 100;
       });
     }
@@ -355,6 +357,7 @@ function teamView() {
     if (!p) return;
     const primary = p.p[0];
     if (grouped[primary] !== undefined) grouped[primary].push(p);
+    else if (p.p.includes('DEF')) grouped['RB'].push(p);
     else grouped['CM'].push(p);
   });
   const mdStats = STATS[MATCHDAY] || {};

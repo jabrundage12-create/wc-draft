@@ -242,9 +242,11 @@ function computeStandings() {
         totals[seat].rating  += parseFloat(st.rating || 0);
         totals[seat].takeons += (st.takeons || 0);
         totals[seat].tackles += (st.tackles || 0);
-        // CS: GK and DEF players count, but only once per national team per matchday
-        const isDefOrGK = p && (p.p.includes('GK') || p.p.includes('CB') || p.p.includes('RB') || p.p.includes('LB') || p.p.includes('DEF'));
-        if (isDefOrGK && st.cs && p.c && !csTeamsAwarded[p.c]) {
+        // CS: only counts if player is slotted in a defensive or GK role
+        // Use the lineup slot (item.group) not the player's tag set
+        const csSlots = ['GK','CB','FB','WB','RB','LB'];
+        const inDefSlot = csSlots.includes(item.group);
+        if (inDefSlot && st.cs && p && p.c && !csTeamsAwarded[p.c]) {
           totals[seat].cs++;
           csTeamsAwarded[p.c] = true;
         }

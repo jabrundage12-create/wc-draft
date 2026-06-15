@@ -277,23 +277,33 @@ async function fetchStats(md) {
     const allStats = {};
     for (const fix of d.response) {
       if (fix.fixture.status.short !== 'FT') continue;
+      // Determine actual clean sheet from scoreline, not player-level stats
+      const homeGoals = fix.score && fix.score.fulltime && fix.score.fulltime.home;
+      const awayGoals = fix.score && fix.score.fulltime && fix.score.fulltime.away;
+      const homeTeam = fix.teams && fix.teams.home && fix.teams.home.name;
+      const awayTeam = fix.teams && fix.teams.away && fix.teams.away.name;
+      // homeCS = away scored 0, awayCS = home scored 0
+      const homeCS = awayGoals === 0;
+      const awayCS = homeGoals === 0;
       const sr = await fetch('https://v3.football.api-sports.io/fixtures/players?fixture=' + fix.fixture.id, {headers:{'x-apisports-key':API_KEY}});
       const sd = await sr.json();
-      (sd.response || []).forEach(team => {
-        (team.players || []).forEach(pp => {
+      (sd.response || []).forEach((teamData, teamIdx) => {
+        // teamIdx 0 = home, teamIdx 1 = away in API response
+        const thisTeamCS = teamIdx === 0 ? homeCS : awayCS;
+        (teamData.players || []).forEach(pp => {
           const matched = matchName(pp.player.name);
           if (!matched) return;
           const s = pp.statistics[0];
           allStats[matched.id] = {
-            goals: s.goals && s.goals.total || 0,
+            goals:   s.goals && s.goals.total || 0,
             assists: s.goals && s.goals.assists || 0,
-            passes: s.passes && s.passes.total || 0,
-            rating: parseFloat(s.games && s.games.rating || 0),
+            passes:  s.passes && s.passes.total || 0,
+            rating:  parseFloat(s.games && s.games.rating || 0),
             takeons: s.dribbles && s.dribbles.success || 0,
             tackles: s.tackles && s.tackles.total || 0,
-            cs: (s.games && s.games.minutes > 0) && ((s.goals && s.goals.conceded || 0) === 0),
-            saves: s.goals && s.goals.saves || 0,
-            faced: (s.goals && s.goals.saves || 0) + (s.goals && s.goals.conceded || 0),
+            cs:      thisTeamCS && (s.games && s.games.minutes > 0),
+            saves:   s.goals && s.goals.saves || 0,
+            faced:   (s.goals && s.goals.saves || 0) + (s.goals && s.goals.conceded || 0),
             minutes: s.games && s.games.minutes || 0,
           };
         });

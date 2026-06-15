@@ -710,6 +710,55 @@ function adminView() {
       + '</div>';
   }
   h += '</div>';
+
+  // Raw stats table for cross-checking
+  const mdStats = STATS[MATCHDAY] || {};
+  const statPlayerIds = Object.keys(mdStats);
+  if (statPlayerIds.length) {
+    h += '<div class="admin-card" style="margin-top:4px"><h3>Raw Stats — MD ' + MATCHDAY + '</h3>'
+      + '<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:12px;min-width:600px">'
+      + '<thead><tr style="border-bottom:1px solid var(--line)">'
+      + '<th style="text-align:left;padding:6px 8px;color:var(--dim)">Player</th>'
+      + '<th style="padding:6px 4px;color:var(--dim)">G</th>'
+      + '<th style="padding:6px 4px;color:var(--dim)">A</th>'
+      + '<th style="padding:6px 4px;color:var(--dim)">Pass</th>'
+      + '<th style="padding:6px 4px;color:var(--dim)">Rtg</th>'
+      + '<th style="padding:6px 4px;color:var(--dim)">T/O</th>'
+      + '<th style="padding:6px 4px;color:var(--dim)">Tkl</th>'
+      + '<th style="padding:6px 4px;color:var(--dim)">CS</th>'
+      + '<th style="padding:6px 4px;color:var(--dim)">Sv</th>'
+      + '<th style="padding:6px 4px;color:var(--dim)">Min</th>'
+      + '</tr></thead><tbody>';
+    // Sort by player name
+    statPlayerIds
+      .sort((a,b) => {
+        const pa = getPlayer(parseInt(a)), pb = getPlayer(parseInt(b));
+        return (pa ? pa.n : '').localeCompare(pb ? pb.n : '');
+      })
+      .forEach(pid => {
+        const p = getPlayer(parseInt(pid));
+        const st = mdStats[pid];
+        if (!st) return;
+        h += '<tr style="border-bottom:1px solid var(--line)">'
+          + '<td style="padding:6px 8px;font-weight:600">' + (p ? p.n : 'ID:' + pid)
+          + '<span style="color:var(--dim);font-size:10px;margin-left:4px">' + (p ? p.c : '') + '</span></td>'
+          + '<td style="padding:6px 4px;text-align:center">' + (st.goals || 0) + '</td>'
+          + '<td style="padding:6px 4px;text-align:center">' + (st.assists || 0) + '</td>'
+          + '<td style="padding:6px 4px;text-align:center">' + (st.passes || 0) + '</td>'
+          + '<td style="padding:6px 4px;text-align:center">' + (st.rating ? parseFloat(st.rating).toFixed(1) : '-') + '</td>'
+          + '<td style="padding:6px 4px;text-align:center">' + (st.takeons || 0) + '</td>'
+          + '<td style="padding:6px 4px;text-align:center">' + (st.tackles || 0) + '</td>'
+          + '<td style="padding:6px 4px;text-align:center">' + (st.cs ? '✓' : '-') + '</td>'
+          + '<td style="padding:6px 4px;text-align:center">' + (st.saves || 0) + '</td>'
+          + '<td style="padding:6px 4px;text-align:center">' + (st.minutes || 0) + '</td>'
+          + '</tr>';
+      });
+    h += '</tbody></table></div></div>';
+  } else {
+    h += '<div class="admin-card" style="margin-top:4px"><h3>Raw Stats — MD ' + MATCHDAY + '</h3>'
+      + '<div style="color:var(--dim);font-size:13px">No stats fetched yet for this matchday.</div></div>';
+  }
+
   return h;
 }
 

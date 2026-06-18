@@ -579,22 +579,75 @@ function topFreeAgentsByPos() {
   if (!Object.keys(PLAYERS_MAP).length) return {};
   const taken = draftedPlayerIds();
   const buckets = { GK: [], CB: [], RB: [], LB: [], CM: [], CAM: [], W: [], ST: [] };
-  function primaryBucket(p) {
-    const tags = p.p || [];
-    for (const t of tags) {
-      if (buckets[t] !== undefined) return t;
+  
+  // ─── YOUR TAILORED FA GOALIE LIST ───────────────────────────────
+  // These guys will always populate the top 10 available slots in order
+  const gkOverrideOrder = [
+    "Maignan",
+    "Mike Maignan", // Included alias variations just in case
+    "Courtois",
+    "Thibaut Courtois",
+    "Kobel",
+    "Gregor Kobel",
+    "Livakovic",
+    "Dominik Livakovic",
+    "Pickford",
+    "Jordan Pickford",
+    "Matt Turner",
+    "Diogo Costa",
+    "Ver Bruggen",
+    "Bart Verbruggen",
+    "Bounou",
+    "Yassine Bounou",
+    "Matt Ryan",
+    "Mathew Ryan"
+  ];
+  // ──────────────────────────────────────────────────────────────────
+
+  // 1. Separate undrafted players into position buckets
+  Object.values(PLAYERS_MAP).forEach(player => {
+    if (taken[player.id]) return; // Skip if currently on a manager's roster
+    
+    const primaryPos = player.p && player.p[0];
+    if (buckets[primaryPos] !== undefined) {
+      buckets[primaryPos].push(player);
     }
-    return null; // skip players with no matching bucket (generic DEF, etc.)
-  }
-  const all = Object.values(PLAYERS_MAP).filter(p => !taken[p.id]);
-  all.sort((a, b) => (a.rank || 9999) - (b.rank || 9999));
-  all.forEach(p => {
-    const bucket = primaryBucket(p);
-    if (bucket && buckets[bucket].length < 10) buckets[bucket].push(p);
   });
+
+  // 2. Sort the buckets
+  Object.keys(buckets).forEach(pos => {
+    if (pos === 'GK') {
+      // Force your custom preferred priority for Goalkeepers
+      buckets[pos].sort((a, b) => {
+        const indexA = gkOverrideOrder.indexOf(a.n);
+        const indexB = gkOverrideOrder.indexOf(b.n);
+        
+        // If both are in your custom list, sort by your precise order
+        if (indexA !== -1 && indexB !== -1) return indexA - indexB;
+        
+        // If only A is on your list, push them to the top
+        if (indexA !== -1) return -1;
+        
+        // If only B is on your list, push them to the top
+        if (indexB !== -1) return 1;
+        
+        // Fallback: obscure keepers default to database ID order at the very bottom
+        return a.id - b.id; 
+      });
+    } else {
+      // Keep using the standard sorting for out-field positions
+      buckets[pos].sort((a, b) => {
+        if (b.s !== a.s) return (b.s ? 1 : 0) - (a.s ? 1 : 0);
+        return (a.rank || 999) - (b.rank || 999);
+      });
+    }
+
+    // Chop the pool down to just the top 10 available for display
+    buckets[pos] = buckets[pos].slice(0, 10);
+  });
+
   return buckets;
 }
-
 function freeAgentsView() {
   if (!Object.keys(PLAYERS_MAP).length) return '<div class="empty">Player data loading...</div>';
   const locked = LOCKS[MATCHDAY];
